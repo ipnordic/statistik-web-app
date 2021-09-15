@@ -1,12 +1,16 @@
 .table,
 th,
 td {
-    border-bottom: 1px solid black;
-    width: auto;
-    border-collapse: collapse;
-    padding: 4px;
+  border-bottom: 1px solid black;
+  width: auto;
+  border-collapse: collapse;
+  padding: 4px;
 }
 
 .tableHover:hover {
-    background-color: #00641634;
+  background-color: #00641634;
+}
+
+.tdCenter {
+  text-align: center;
 }
