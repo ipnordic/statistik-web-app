@@ -1,13 +1,12 @@
 import useFetch from "../../hooks/useFetch";
 import styles from "../Table.module.css";
 
-const url =
-  "https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/Agent?startDate=2021-09-15&endDate=2021-09-16&company=2776&queue=1500";
-
 const USERNAME = process.env.REACT_APP_API_USERNAME;
 const PASSWORD = process.env.REACT_APP_API_PASSWORD;
 
-const Agent = () => {
+const Agent = ({ company = "2776", queue }) => {
+  const url = `https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/Agent?startDate=2021-09-15&endDate=2021-09-16&company=${company}&queue=${queue}`;
+
   const { data, loading, error } = useFetch(url, USERNAME, PASSWORD);
   return (
     <>
