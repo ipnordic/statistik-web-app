@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Period from "./components/Queue/Period";
 import "./App.css";
-import Table from "./components/Table";
-import Form from "./components/Form";
+import Agent from "./components/Queue/Agent";
 
 function App() {
   const [status, setStatus] = useState("Henter data....");
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetchData("2021-09-6", "2021-09-10", "1500");
+    fetchData("2021-09-15", "2021-09-16");
   }, []);
 
-  const fetchData = async (startDate, endDate, queue) => {
+  const fetchData = async (startDate, endDate, queue = "") => {
     try {
       const response = await axios(
         `${process.env.REACT_APP_API_URL}Queue/v2/Agent?startDate=${startDate}&endDate=${endDate}&company=2776&queue=${queue}`,
@@ -36,12 +36,13 @@ function App() {
   };
 
   return (
-    <>
+    <div className="container">
       <h1>ipnordic Statistik</h1>
       {status && <p>{status}</p>}
-      <Form />
-      <Table data={data} />
-    </>
+
+      {/* <Period data={data} /> */}
+      <Agent data={data} />
+    </div>
   );
 }
 
