@@ -1,0 +1,21 @@
+.Header {
+  border: 2px solid black;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.Logo {
+  padding: 20px;
+}
+
+.Navbar {
+  padding: 20px;
+}
+
+.Image {
+  width: 128px;
+  height: 64px;
+}
