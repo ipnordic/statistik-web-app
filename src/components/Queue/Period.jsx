@@ -3,7 +3,7 @@ import useFetch from "../../hooks/useFetch";
 import styles from "../Table.module.css";
 
 const url =
-  "https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/Period?startDate=2021-09-15&endDate=2021-09-16&company=2776&queue=1500";
+  "https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/Period?startDate=2021-09-15&endDate=2021-09-16&company=2776";
 
 const USERNAME = process.env.REACT_APP_API_USERNAME;
 const PASSWORD = process.env.REACT_APP_API_PASSWORD;
@@ -24,6 +24,7 @@ const Period = () => {
               <th>Kald</th>
               <th>Besvaret kald</th>
               <th>Avg. Calltime</th>
+              <th>Frafald</th>
             </tr>
             {data &&
               data.map((item) => (
@@ -31,11 +32,32 @@ const Period = () => {
                   <td className={styles.tdCenter}>{item.QueueName}</td>
                   <td className={styles.tdCenter}>{item.QueueExtension}</td>
                   <td className={styles.tdCenter}>{item.Calls}</td>
-                  <td className={styles.tdCenter}>{item.AnsweredCalls}</td>
-                  <td className={styles.tdCenter}>
+                  <td
+                    className={
+                      item.AnsweredCalls === null
+                        ? styles.tdNA
+                        : styles.tdCenter
+                    }
+                  >
+                    {item.AnsweredCalls === null ? "N/A" : item.AnsweredCalls}
+                  </td>
+                  <td
+                    className={
+                      item.AverageCalltime === null
+                        ? styles.tdNA
+                        : styles.tdCenter
+                    }
+                  >
                     {item.AverageCalltime === null
                       ? "N/A"
                       : item.AverageCalltime}
+                  </td>
+                  <td
+                    className={
+                      item.Abandoned === null ? styles.tdNA : styles.tdCenter
+                    }
+                  >
+                    {item.Abandoned === null ? "N/A" : item.Abandoned}
                   </td>
                 </tr>
               ))}
