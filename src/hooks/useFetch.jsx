@@ -1,40 +1,33 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-/**
- *
- * ! UNDER CONSTRUCTION !
- */
+function useFetch(url, username, password) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
 
-const useFetch = (url, username, password) => {
-    const [status, setStatus] = useState("idle");
-    const [data, setData] = useState(null);
+  useEffect(() => {
+    setLoading("Henter data...");
+    setData(null);
+    setError(null);
+    const response = axios(url, {
+      auth: { username: username, password: password },
+    })
+      .then((response) => {
+        if (response.statusText !== "OK") {
+          throw new Error("Der opstod en fejl..");
+        }
+        setLoading(false);
+        response.data && setData(response.data);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setError(err.message);
+      });
+    return response;
+  }, [url, username, password]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                setStatus("Fetching...");
-                const response = await axios(url, {
-                    auth: {
-                        username: username,
-                        password: password,
-                    },
-                });
-                if (response.statusText !== "OK") {
-                    setStatus("Could not fetch the data!");
-                    throw new Error("Could not fetch the data!");
-                }
-                setData(response.data);
-                setStatus("");
-            } catch (error) {
-                return error.message;
-            }
-        };
-
-        fetchData();
-    }, [url, username, password]);
-
-    return { status, data };
-};
+  return { data, loading, error };
+}
 
 export default useFetch;
