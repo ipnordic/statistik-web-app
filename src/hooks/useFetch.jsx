@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function useFetch(url, username, password) {
+function useFetch(statType, startDate, endDate, company, queue) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
 
+  const URL = process.env.REACT_APP_API_URL_QUEUE;
   useEffect(() => {
     setLoading("Henter data...");
     setData(null);
     setError(null);
-    const response = axios(url, {
-      auth: { username: username, password: password },
-    })
+    const response = axios(
+      `${URL}/v2/${statType}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queue}`,
+      {
+        auth: {
+          username: process.env.REACT_APP_API_USERNAME,
+          password: process.env.REACT_APP_API_PASSWORD,
+        },
+      }
+    )
       .then((response) => {
         if (response.statusText !== "OK") {
           throw new Error("Der opstod en fejl..");
@@ -25,7 +32,7 @@ function useFetch(url, username, password) {
         setError(err.message);
       });
     return response;
-  }, [url, username, password]);
+  }, [URL, statType, startDate, endDate, company, queue]);
 
   return { data, loading, error };
 }
