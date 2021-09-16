@@ -2,14 +2,15 @@ import React from "react";
 import useFetch from "../../hooks/useFetch";
 import styles from "../Table.module.css";
 
-const USERNAME = process.env.REACT_APP_API_USERNAME;
-const PASSWORD = process.env.REACT_APP_API_PASSWORD;
+const Period = ({ statType, company, queue, startDate, endDate }) => {
+  const { data, loading, error } = useFetch(
+    statType,
+    startDate,
+    endDate,
+    company,
+    queue
+  );
 
-const Period = ({ company = "2776", queue }) => {
-  const url = `https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/Period?startDate=2021-09-15&endDate=2021-09-16&company=${company}&queue=${queue}`;
-
-  const { data, loading, error } = useFetch(url, USERNAME, PASSWORD);
-  data && console.log(data);
   return (
     <>
       {loading && <p>{loading}</p>}
@@ -17,7 +18,7 @@ const Period = ({ company = "2776", queue }) => {
       {data && (
         <table className={styles.table}>
           <tbody>
-            <tr className={styles.tableHover}>
+            <tr className={styles.tableHeader}>
               <th>Kønavn</th>
               <th>Kønummer</th>
               <th>Kald</th>
