@@ -4,6 +4,7 @@
   align-items: center;
   justify-content: center;
   width: auto;
-  border: 5px solid green;
-  padding: 10px;
+  height: auto;
+  /* border: 5px solid green; */
+  /* padding: 10px; */
 }
