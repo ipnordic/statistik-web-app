@@ -1,18 +1,111 @@
-import useFetch from "../../hooks/useFetch";
+import axios from "axios";
+import { useState } from "react";
 import styles from "../Table.module.css";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import MenuItem from "@mui/material/MenuItem";
 
-const Agent = ({ company, queue, startDate, endDate }) => {
-  const { data, loading, error } = useFetch(
-    "Agent",
-    startDate,
-    endDate,
-    company,
-    queue
-  );
+const Agent = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(null);
+  const [error, setError] = useState(null);
+  const [queue, setQueue] = useState("");
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [type, setType] = useState("");
+
+  const fetchData = async () => {
+    const options = {
+      auth: {
+        username: process.env.REACT_APP_API_USERNAME,
+        password: process.env.REACT_APP_API_PASSWORD,
+      },
+    };
+    try {
+      const response = await axios(
+        `https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/${type}?startDate=${startDate}&endDate=${endDate}&company=2776&queue=${queue}`,
+        options
+      );
+
+      setLoading(false);
+      setData(response.data);
+    } catch (error) {
+      setLoading(false);
+      setError("Noget gik galt...");
+    }
+  };
+  const typeSelect = [
+    { value: "Agent", label: "Agent" },
+    { value: "Period", label: "Period" },
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setLoading("Henter data...");
+    fetchData();
+  };
 
   return (
     <>
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        autoComplete="off"
+        sx={{
+          "& .MuiTextField-root": { m: 0.5, width: "20ch" },
+        }}
+      >
+        <TextField
+          select
+          size="small"
+          required
+          variant="outlined"
+          value={type}
+          label="Select"
+          onChange={(e) => setType(e.target.value)}
+        >
+          {typeSelect.map((option) => (
+            <MenuItem key={Math.random()} value={option.value}>
+              {option.label}
+            </MenuItem>
+          ))}
+        </TextField>
+        <TextField
+          type="text"
+          required
+          size="small"
+          variant="outlined"
+          value={queue}
+          label="Kønummer"
+          onChange={(e) => setQueue(e.target.value)}
+        />
+        <TextField
+          type="text"
+          required
+          size="small"
+          variant="outlined"
+          value={startDate}
+          label="Startdato"
+          helperText="YYYY-MM-DD"
+          onChange={(e) => setStartDate(e.target.value)}
+        />
+        <TextField
+          type="text"
+          required
+          size="small"
+          variant="outlined"
+          value={endDate}
+          label="Slutdato"
+          helperText="YYYY-MM-DD"
+          onChange={(e) => setEndDate(e.target.value)}
+        />
+        <Button type="submit" variant="contained">
+          Submit
+        </Button>
+      </Box>
+
+      {/* </form> */}
       {loading && <p>{loading}</p>}
       {error && <p>{error}</p>}
       {data && (
