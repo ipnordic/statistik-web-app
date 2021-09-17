@@ -1,29 +1,8 @@
-.table,
-th,
-td {
-  border-bottom: 1px solid black;
+.table {
   width: auto;
-  border-collapse: collapse;
-  padding: 4px;
+  padding: 8px;
 }
 
 .tableHover:hover {
   background-color: #00641634;
-}
-
-.tdCenter {
-  text-align: center;
-}
-
-.tdNA {
-  text-align: center;
-  color: rgba(0, 0, 0, 0.226);
-}
-
-.tableHeader {
-  background-color: dimgrey;
-}
-
-.form {
-  margin-bottom: 20px;
 }
