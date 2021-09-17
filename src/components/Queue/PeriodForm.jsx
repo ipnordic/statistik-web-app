@@ -1,73 +1,49 @@
-import React from "react";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import styles from "../Table.module.css";
 
 const Period = ({ data }) => {
   return (
-    <>
-      <table className={styles.table}>
-        <tbody>
-          <tr className={styles.tableHeader}>
-            <th>Kønavn</th>
-            <th>Kønummer</th>
-            <th>Kald</th>
-            <th>Besvaret kald</th>
-            <th>Omstillet</th>
-            <th>Avg. Calltime</th>
-            <th>Frafald</th>
-            <th>Gns. Ventetid</th>
-            <th>Maks Ventetid</th>
-          </tr>
-          {data &&
-            data.map((item) => (
-              <tr className={styles.tableHover} key={item.QueueExtension}>
-                <td className={styles.tdCenter}>{item.QueueName}</td>
-                <td className={styles.tdCenter}>{item.QueueExtension}</td>
-                <td className={styles.tdCenter}>{item.Calls}</td>
-                <td
-                  className={
-                    item.AnsweredCalls === null ? styles.tdNA : styles.tdCenter
-                  }
-                >
-                  {item.AnsweredCalls === null ? "N/A" : item.AnsweredCalls}
-                </td>
-                <td
-                  className={
-                    item.Transfers === null ? styles.tdNA : styles.tdCenter
-                  }
-                >
-                  {item.Transfers === null ? "N/A" : item.Transfers}
-                </td>
-                <td
-                  className={
-                    item.AverageCalltime === null
-                      ? styles.tdNA
-                      : styles.tdCenter
-                  }
-                >
-                  {item.AverageCalltime === null ? "N/A" : item.AverageCalltime}
-                </td>
-                <td
-                  className={
-                    item.Abandoned === null ? styles.tdNA : styles.tdCenter
-                  }
-                >
-                  {item.Abandoned === null ? "N/A" : item.Abandoned}
-                </td>
-                <td
-                  className={
-                    item.AverageHoldtime === null
-                      ? styles.tdNA
-                      : styles.tdCenter
-                  }
-                >
-                  {item.AverageHoldtime === null ? "N/A" : item.AverageHoldtime}
-                </td>
-                <td>{item.MaxHoldtime}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </>
+    <div className={styles.table}>
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="queue data table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Kønavn</TableCell>
+              <TableCell>Kønummer</TableCell>
+              <TableCell>Kald</TableCell>
+              <TableCell>Besvaret kald</TableCell>
+              <TableCell>Omstillet</TableCell>
+              <TableCell>Frafald</TableCell>
+              <TableCell>Gns. Samtaletid</TableCell>
+              <TableCell>Gns. Ventetid</TableCell>
+              <TableCell>Længste ventetid</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {data &&
+              data.map((item) => (
+                <TableRow className={styles.tableHover} key={Math.random()}>
+                  <TableCell>{item.QueueName}</TableCell>
+                  <TableCell>{item.QueueExtension}</TableCell>
+                  <TableCell>{item.Calls}</TableCell>
+                  <TableCell>{item.AnsweredCalls}</TableCell>
+                  <TableCell>{item.Transfers}</TableCell>
+                  <TableCell>{item.Abandoned}</TableCell>
+                  <TableCell>{item.AverageCalltime}</TableCell>
+                  <TableCell>{item.AverageHoldtime}</TableCell>
+                  <TableCell>{item.MaxHoldtime}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 
