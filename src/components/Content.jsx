@@ -1,9 +1,11 @@
-import styles from "../Table.module.css";
-import Button from "@mui/material/Button";
+import LoadingButton from "@mui/lab/LoadingButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
-import useFetchAPI from "../../hooks/useFetchAPI";
+import SendIcon from "@mui/icons-material/Send";
+import useFetchAPI from "../hooks/useFetchAPI";
+import Period from "./Queue/PeriodForm";
+import AgentForm from "./Queue/AgentForm";
 
 const Agent = () => {
   const {
@@ -29,8 +31,21 @@ const Agent = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading("Henter data...");
     fetchData();
+  };
+
+  const handleClick = () => {
+    if (type.length <= 0) {
+      return;
+    } else if (queueNumber.length <= 0) {
+      return;
+    } else if (startDate.length <= 0) {
+      return;
+    } else if (endDate.length <= 0) {
+      return;
+    } else {
+      setLoading(true);
+    }
   };
 
   return (
@@ -87,41 +102,28 @@ const Agent = () => {
           helperText="YYYY-MM-DD"
           onChange={(e) => setEndDate(e.target.value)}
         />
-        <Button type="submit" variant="contained">
+        <LoadingButton
+          type="submit"
+          size="large"
+          onClick={handleClick}
+          endIcon={<SendIcon />}
+          loading={loading}
+          loadingPosition="end"
+          variant="contained"
+        >
           Submit
-        </Button>
+        </LoadingButton>
       </Box>
 
-      {loading && <p>{loading}</p>}
+      {/* {loading && <p>{loading}</p>} */}
       {error && <p>{error}</p>}
-      {data && (
-        <>
-          <table className={styles.table}>
-            <tbody>
-              <tr className={styles.tableHeader}>
-                <th>Navn</th>
-                <th>Lokalnummer</th>
-                <th>Kald Besvaret</th>
-                <th>Gns. Samtaletid</th>
-                <th>Kald Omstillet</th>
-                <th>DND Tid (dagligt)</th>
-                <th>Pause Tid (dagligt)</th>
-              </tr>
-              {data &&
-                data.map((item) => (
-                  <tr className={styles.tableHover} key={item.Agent}>
-                    <td className={styles.tdCenter}>{item.Name}</td>
-                    <td className={styles.tdCenter}>{item.Agent}</td>
-                    <td className={styles.tdCenter}>{item.Calls}</td>
-                    <td className={styles.tdCenter}>{item.AverageCalltime}</td>
-                    <td className={styles.tdCenter}>{item.Transfers}</td>
-                    <td className={styles.tdCenter}>{item.DND}</td>
-                    <td className={styles.tdCenter}>{item.Pause}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-        </>
+
+      {type === "Agent" ? (
+        <AgentForm data={data} />
+      ) : type === "Period" ? (
+        <Period data={data} />
+      ) : (
+        ""
       )}
     </>
   );

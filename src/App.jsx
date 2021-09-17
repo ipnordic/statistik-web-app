@@ -1,5 +1,5 @@
 import Header from "./components/Header";
-import Agent from "./components/Queue/Agent";
+import Content from "./components/Content";
 import styles from "./App.module.css";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <div className={styles.Container}>
       <Header />
       <h1>ipnordic Statistik</h1>
-      <Agent />
+      <Content />
     </div>
   );
 }
