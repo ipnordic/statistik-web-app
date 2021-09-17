@@ -1,40 +1,27 @@
-import axios from "axios";
-import { useState } from "react";
 import styles from "../Table.module.css";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
+import useFetchAPI from "../../hooks/useFetchAPI";
 
 const Agent = () => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(null);
-  const [error, setError] = useState(null);
-  const [queue, setQueue] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [type, setType] = useState("");
+  const {
+    data,
+    loading,
+    error,
+    type,
+    queueNumber,
+    startDate,
+    endDate,
+    setType,
+    setStartDate,
+    setEndDate,
+    setQueueNumber,
+    setLoading,
+    fetchData,
+  } = useFetchAPI();
 
-  const fetchData = async () => {
-    const options = {
-      auth: {
-        username: process.env.REACT_APP_API_USERNAME,
-        password: process.env.REACT_APP_API_PASSWORD,
-      },
-    };
-    try {
-      const response = await axios(
-        `https://api-prod01.ipnordic.dk/api/Statistics/Queue/v2/${type}?startDate=${startDate}&endDate=${endDate}&company=2776&queue=${queue}`,
-        options
-      );
-
-      setLoading(false);
-      setData(response.data);
-    } catch (error) {
-      setLoading(false);
-      setError("Noget gik galt...");
-    }
-  };
   const typeSelect = [
     { value: "Agent", label: "Agent" },
     { value: "Period", label: "Period" },
@@ -76,9 +63,9 @@ const Agent = () => {
           required
           size="small"
           variant="outlined"
-          value={queue}
+          value={queueNumber}
           label="Kønummer"
-          onChange={(e) => setQueue(e.target.value)}
+          onChange={(e) => setQueueNumber(e.target.value)}
         />
         <TextField
           type="text"
