@@ -3,8 +3,7 @@
   border: 1px solid black;
   width: 100%;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .Logo {
@@ -16,6 +15,14 @@
 }
 
 .Image {
-  width: 64px;
-  height: 64px;
+  width: 84px;
+  height: 84px;
+}
+
+.HeaderTwo {
+  /* border: 1px solid red; */
+  width: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
 }
