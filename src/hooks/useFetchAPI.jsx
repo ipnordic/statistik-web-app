@@ -33,7 +33,7 @@ const useFetchAPI = () => {
       })
       .catch((err) => {
         setLoading(false);
-        setError(err.message);
+        setError(`${err.message} - Noget gik galt, kontakt supporten.`);
       });
     return response;
   };
@@ -52,7 +52,6 @@ const useFetchAPI = () => {
     setQueueNumber,
     setData,
     setLoading,
-    setError,
     fetchData,
   };
 };
