@@ -6,11 +6,15 @@ function useFetch(statType, startDate, endDate, company, queue) {
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
 
-  const URL = process.env.REACT_APP_API_URL_QUEUE;
+  /**
+   * TODO: Add logic to url for endDate to add + 1 day, so users can type "2021-09-16 to 2021-09-16"
+   */
+
   useEffect(() => {
     setLoading("Henter data...");
     setData(null);
     setError(null);
+    const URL = process.env.REACT_APP_API_URL_QUEUE;
     const response = axios(
       `${URL}/v2/${statType}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queue}`,
       {
@@ -32,7 +36,7 @@ function useFetch(statType, startDate, endDate, company, queue) {
         setError(err.message);
       });
     return response;
-  }, [URL, statType, startDate, endDate, company, queue]);
+  }, [statType, startDate, endDate, company, queue]);
 
   return { data, loading, error };
 }
