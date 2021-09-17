@@ -1,6 +1,7 @@
 import Header from "./components/Header";
 import Content from "./components/Content";
 import styles from "./App.module.css";
+import "@fontsource/roboto/400.css";
 
 function App() {
   return (
