@@ -6,12 +6,14 @@ import SendIcon from "@mui/icons-material/Send";
 import useFetchAPI from "../hooks/useFetchAPI";
 import Period from "./Queue/PeriodForm";
 import AgentForm from "./Queue/AgentForm";
+import Alert from "@mui/material/Alert";
 
 const Agent = () => {
   const {
     data,
     loading,
     error,
+    setData,
     type,
     queueNumber,
     startDate,
@@ -64,8 +66,11 @@ const Agent = () => {
           required
           variant="outlined"
           value={type}
-          label="Select"
-          onChange={(e) => setType(e.target.value)}
+          label="Vælg"
+          onChange={(e) => {
+            setData(null);
+            setType(e.target.value);
+          }}
         >
           {typeSelect.map((option) => (
             <MenuItem key={Math.random()} value={option.value}>
@@ -73,22 +78,35 @@ const Agent = () => {
             </MenuItem>
           ))}
         </TextField>
-        <TextField
-          type="text"
-          required
-          size="small"
-          variant="outlined"
-          value={queueNumber}
-          label="Kønummer"
-          onChange={(e) => setQueueNumber(e.target.value)}
-        />
+        {type === "Period" ? (
+          <TextField
+            type="text"
+            size="small"
+            variant="outlined"
+            value={queueNumber}
+            label="Kønummer"
+            helperText="Blankt for alle køer"
+            onChange={(e) => setQueueNumber(e.target.value)}
+          />
+        ) : (
+          <TextField
+            type="text"
+            required
+            size="small"
+            variant="outlined"
+            value={queueNumber}
+            label="Kønummer"
+            onChange={(e) => setQueueNumber(e.target.value)}
+          />
+        )}
+
         <TextField
           type="text"
           required
           size="small"
           variant="outlined"
           value={startDate}
-          label="Startdato"
+          label="Start dato"
           helperText="YYYY-MM-DD"
           onChange={(e) => setStartDate(e.target.value)}
         />
@@ -98,7 +116,7 @@ const Agent = () => {
           size="small"
           variant="outlined"
           value={endDate}
-          label="Slutdato"
+          label="Slut dato"
           helperText="YYYY-MM-DD"
           onChange={(e) => setEndDate(e.target.value)}
         />
@@ -115,8 +133,7 @@ const Agent = () => {
         </LoadingButton>
       </Box>
 
-      {/* {loading && <p>{loading}</p>} */}
-      {error && <p>{error}</p>}
+      {error && <Alert severity="error">{error}</Alert>}
 
       {type === "Agent" ? (
         <AgentForm data={data} />
