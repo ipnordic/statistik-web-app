@@ -5,9 +5,10 @@ import logo from "../assets/logo.png";
 const Header = () => {
   return (
     <header className={styles.Header}>
-      <div className={styles.Logo}>
+      <a href="http://localhost:3000">
         <img className={styles.Image} src={logo} alt="logo" />
-      </div>
+      </a>
+
       <nav className={styles.Navbar}>Navbar</nav>
     </header>
   );
