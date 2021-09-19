@@ -11,6 +11,7 @@ const useFetchAPI = () => {
   const [queueNumber, setQueueNumber] = useState("");
 
   const fetchData = async () => {
+    setLoading(true);
     const options = {
       auth: {
         username: process.env.REACT_APP_API_USERNAME,
@@ -39,6 +40,7 @@ const useFetchAPI = () => {
   };
 
   return {
+    fetchData,
     data,
     loading,
     error,
@@ -52,7 +54,6 @@ const useFetchAPI = () => {
     setQueueNumber,
     setData,
     setLoading,
-    fetchData,
   };
 };
 
