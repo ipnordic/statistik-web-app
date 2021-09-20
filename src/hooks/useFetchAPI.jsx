@@ -8,6 +8,7 @@ const useFetchAPI = () => {
   const [type, setType] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [company, setCompany] = useState("");
   const [queueNumber, setQueueNumber] = useState("");
 
   const fetchData = async () => {
@@ -22,7 +23,7 @@ const useFetchAPI = () => {
     const API_URL = process.env.REACT_APP_API_URL_QUEUE;
 
     const response = await axios(
-      `${API_URL}/v2/${type}?startDate=${startDate}&endDate=${endDate}&company=2776&queue=${queueNumber}`,
+      `${API_URL}/v2/${type}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
       options
     )
       .then((response) => {
@@ -47,10 +48,12 @@ const useFetchAPI = () => {
     type,
     startDate,
     endDate,
+    company,
     queueNumber,
     setType,
     setStartDate,
     setEndDate,
+    setCompany,
     setQueueNumber,
     setData,
     setLoading,
