@@ -7,6 +7,8 @@ import useFetchAPI from "../hooks/useFetchAPI";
 import Period from "./Queue/PeriodForm";
 import AgentForm from "./Queue/AgentForm";
 import Alert from "@mui/material/Alert";
+import AgentByDay from "./Queue/AgentByDay";
+import Daily from "./Queue/Daily";
 
 const Agent = () => {
   const {
@@ -18,9 +20,11 @@ const Agent = () => {
     queueNumber,
     startDate,
     endDate,
+    company,
     setType,
     setStartDate,
     setEndDate,
+    setCompany,
     setQueueNumber,
     setLoading,
     fetchData,
@@ -29,6 +33,8 @@ const Agent = () => {
   const typeSelect = [
     { value: "Agent", label: "Agent" },
     { value: "Period", label: "Period" },
+    { value: "AgentByDay", label: "AgentByDay" },
+    { value: "Daily", label: "Daily" },
   ];
 
   const handleSubmit = (e) => {
@@ -78,6 +84,15 @@ const Agent = () => {
             </MenuItem>
           ))}
         </TextField>
+        <TextField
+          type="text"
+          required
+          size="small"
+          variant="outlined"
+          value={company}
+          label="Kundenummer"
+          onChange={(e) => setCompany(e.target.value)}
+        />
         {type === "Period" ? (
           <TextField
             type="text"
@@ -128,6 +143,7 @@ const Agent = () => {
           loading={loading}
           loadingPosition="end"
           variant="contained"
+          sx={{ m: 0.2 }}
         >
           Submit
         </LoadingButton>
@@ -139,6 +155,10 @@ const Agent = () => {
         <AgentForm data={data} />
       ) : type === "Period" ? (
         <Period data={data} />
+      ) : type === "AgentByDay" ? (
+        <AgentByDay data={data} />
+      ) : type === "Daily" ? (
+        <Daily data={data} />
       ) : (
         ""
       )}
