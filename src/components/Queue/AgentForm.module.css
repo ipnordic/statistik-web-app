@@ -1,6 +1,7 @@
 .table {
   width: auto;
   padding: 8px;
+  margin-bottom: 40px;
 }
 
 .tableHover:hover {
