@@ -1,0 +1,9 @@
+.table {
+  width: auto;
+  padding: 8px;
+  margin: 10px;
+}
+
+.tableHover:hover {
+  background-color: #00641634;
+}
