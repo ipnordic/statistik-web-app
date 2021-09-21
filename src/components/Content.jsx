@@ -12,10 +12,10 @@ import Daily from "./Queue/Daily";
 
 const Agent = () => {
   const {
-    data,
+    apiData,
     loading,
     error,
-    setData,
+    setApiData,
     apiStatistics,
     queueNumber,
     startDate,
@@ -74,7 +74,7 @@ const Agent = () => {
           value={apiStatistics}
           label="Vælg"
           onChange={(e) => {
-            setData(null);
+            setApiData(null);
             setApiStatistics(e.target.value);
           }}
         >
@@ -155,13 +155,13 @@ const Agent = () => {
       {error && <Alert severity="error">{error}</Alert>}
 
       {apiStatistics === "Agent" ? (
-        <AgentForm data={data} />
+        <AgentForm apiData={apiData} />
       ) : apiStatistics === "Period" ? (
-        <Period data={data} />
+        <Period apiData={apiData} />
       ) : apiStatistics === "AgentByDay" ? (
-        <AgentByDay data={data} />
+        <AgentByDay apiData={apiData} />
       ) : apiStatistics === "Daily" ? (
-        <Daily data={data} />
+        <Daily apiData={apiData} />
       ) : (
         ""
       )}
