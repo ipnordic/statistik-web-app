@@ -7,10 +7,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "../Queue/AgentForm.module.css";
 
-const AgentForm = ({ data }) => {
+const AgentForm = ({ apiData }) => {
   return (
     <div className={styles.table}>
-      {data && <h3>Du ser statistik på kø: {data[0].QueueName}</h3>}
+      {apiData && <h3>Du ser statistik på kø: {apiData[0].QueueName}</h3>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="queue data table">
           <TableHead>
@@ -25,8 +25,8 @@ const AgentForm = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data &&
-              data.map((item) => (
+            {apiData &&
+              apiData.map((item) => (
                 <TableRow className={styles.tableHover} key={item.Agent}>
                   <TableCell>{item.Name}</TableCell>
                   <TableCell>{item.Agent}</TableCell>
