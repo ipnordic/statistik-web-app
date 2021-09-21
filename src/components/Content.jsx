@@ -16,12 +16,12 @@ const Agent = () => {
     loading,
     error,
     setData,
-    type,
+    apiStatistics,
     queueNumber,
     startDate,
     endDate,
     company,
-    setType,
+    setApiStatistics,
     setStartDate,
     setEndDate,
     setCompany,
@@ -43,7 +43,7 @@ const Agent = () => {
   };
 
   const handleClick = () => {
-    if (type.length <= 0) {
+    if (apiStatistics.length <= 0) {
       return;
     } else if (queueNumber.length <= 0) {
       return;
@@ -71,11 +71,11 @@ const Agent = () => {
           size="small"
           required
           variant="outlined"
-          value={type}
+          value={apiStatistics}
           label="Vælg"
           onChange={(e) => {
             setData(null);
-            setType(e.target.value);
+            setApiStatistics(e.target.value);
           }}
         >
           {typeSelect.map((option) => (
@@ -93,7 +93,7 @@ const Agent = () => {
           label="Kundenummer"
           onChange={(e) => setCompany(e.target.value)}
         />
-        {type === "Period" ? (
+        {apiStatistics === "Period" ? (
           <TextField
             type="text"
             size="small"
@@ -101,7 +101,10 @@ const Agent = () => {
             value={queueNumber}
             label="Kønummer"
             helperText="Blankt for alle køer"
-            onChange={(e) => setQueueNumber(e.target.value)}
+            onChange={(e) => {
+              setLoading(null);
+              setQueueNumber(e.target.value);
+            }}
           />
         ) : (
           <TextField
@@ -151,13 +154,13 @@ const Agent = () => {
 
       {error && <Alert severity="error">{error}</Alert>}
 
-      {type === "Agent" ? (
+      {apiStatistics === "Agent" ? (
         <AgentForm data={data} />
-      ) : type === "Period" ? (
+      ) : apiStatistics === "Period" ? (
         <Period data={data} />
-      ) : type === "AgentByDay" ? (
+      ) : apiStatistics === "AgentByDay" ? (
         <AgentByDay data={data} />
-      ) : type === "Daily" ? (
+      ) : apiStatistics === "Daily" ? (
         <Daily data={data} />
       ) : (
         ""
