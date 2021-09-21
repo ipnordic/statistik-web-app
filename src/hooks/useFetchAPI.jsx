@@ -5,7 +5,7 @@ const useFetchAPI = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
-  const [type, setType] = useState("");
+  const [apiStatistics, setApiStatistics] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [company, setCompany] = useState("");
@@ -20,10 +20,10 @@ const useFetchAPI = () => {
       },
     };
 
-    const API_URL = process.env.REACT_APP_API_URL_QUEUE;
+    const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
 
     const response = await axios(
-      `${API_URL}/v2/${type}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
+      `${API_URL}/v2/${apiStatistics}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
       options
     )
       .then((response) => {
@@ -45,12 +45,12 @@ const useFetchAPI = () => {
     data,
     loading,
     error,
-    type,
+    apiStatistics,
     startDate,
     endDate,
     company,
     queueNumber,
-    setType,
+    setApiStatistics,
     setStartDate,
     setEndDate,
     setCompany,
