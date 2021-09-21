@@ -7,10 +7,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./AgentByDay.module.css";
 
-const AgentByDay = ({ data }) => {
+const AgentByDay = ({ apiData }) => {
   return (
     <div className={styles.table}>
-      {data && <h3>Du ser statistik på kø: {data[0].QueueName}</h3>}
+      {apiData && <h3>Du ser statistik på kø: {apiData[0].QueueName}</h3>}
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="queue data table">
           <TableHead>
@@ -26,8 +26,8 @@ const AgentByDay = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data &&
-              data.map((item) => (
+            {apiData &&
+              apiData.map((item) => (
                 <TableRow className={styles.tableHover} key={Math.random()}>
                   <TableCell>{item.Name}</TableCell>
                   <TableCell>{item.Agent}</TableCell>
