@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./Daily.module.css";
 
-const Daily = ({ data }) => {
+const Daily = ({ apiData }) => {
   return (
     <div className={styles.table}>
       <TableContainer component={Paper}>
@@ -27,8 +27,8 @@ const Daily = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data &&
-              data.map((item) => (
+            {apiData &&
+              apiData.map((item) => (
                 <TableRow className={styles.tableHover} key={Math.random()}>
                   <TableCell>{item.QueueName}</TableCell>
                   <TableCell>{item.QueueExtension}</TableCell>
