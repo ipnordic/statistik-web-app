@@ -7,7 +7,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "./PeriodForm.module.css";
 
-const Period = ({ data }) => {
+const Period = ({ apiData }) => {
   return (
     <div className={styles.table}>
       <TableContainer component={Paper}>
@@ -26,8 +26,8 @@ const Period = ({ data }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {data &&
-              data.map((item) => (
+            {apiData &&
+              apiData.map((item) => (
                 <TableRow className={styles.tableHover} key={Math.random()}>
                   <TableCell>{item.QueueName}</TableCell>
                   <TableCell>{item.QueueExtension}</TableCell>
