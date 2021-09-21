@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const useFetchAPI = () => {
-  const [data, setData] = useState(null);
+  const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
   const [apiStatistics, setApiStatistics] = useState("");
@@ -31,7 +31,7 @@ const useFetchAPI = () => {
           throw new Error("Der opstod en fejl...");
         }
         setLoading(false);
-        response.data && setData(response.data);
+        response.data && setApiData(response.data);
       })
       .catch((err) => {
         setLoading(false);
@@ -42,7 +42,7 @@ const useFetchAPI = () => {
 
   return {
     fetchData,
-    data,
+    apiData,
     loading,
     error,
     apiStatistics,
@@ -55,7 +55,7 @@ const useFetchAPI = () => {
     setEndDate,
     setCompany,
     setQueueNumber,
-    setData,
+    setApiData,
     setLoading,
   };
 };
