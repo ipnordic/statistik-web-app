@@ -11,6 +11,8 @@ import AgentByDay from "./Queue/AgentByDay";
 import Daily from "./Queue/Daily";
 
 const Agent = () => {
+  const obj = localStorage.getItem("testObj");
+  console.log(JSON.parse(obj));
   const {
     apiData,
     loading,
@@ -20,11 +22,9 @@ const Agent = () => {
     queueNumber,
     startDate,
     endDate,
-    company,
     setApiStatistics,
     setStartDate,
     setEndDate,
-    setCompany,
     setQueueNumber,
     setLoading,
     fetchData,
@@ -84,7 +84,7 @@ const Agent = () => {
             </MenuItem>
           ))}
         </TextField>
-        <TextField
+        {/* <TextField
           type="text"
           required
           size="small"
@@ -92,7 +92,7 @@ const Agent = () => {
           value={company}
           label="Kundenummer"
           onChange={(e) => setCompany(e.target.value)}
-        />
+        /> */}
         {apiStatistics === "Period" ? (
           <TextField
             type="text"

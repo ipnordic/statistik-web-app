@@ -35,6 +35,7 @@ const AgentDetails = ({ match }) => {
         response.data && setApiData(response.data);
         setLoading(null);
       } catch (error) {
+        setLoading(null);
         console.log(error);
       }
     };
