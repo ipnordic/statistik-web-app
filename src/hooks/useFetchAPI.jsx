@@ -3,7 +3,7 @@ import { useState } from "react";
 
 const useFetchAPI = () => {
   const [apiData, setApiData] = useState(null);
-  const [loading, setLoading] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [apiStatistics, setApiStatistics] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -35,7 +35,7 @@ const useFetchAPI = () => {
       })
       .catch((err) => {
         setLoading(false);
-        setError(`${err.message} - Noget gik galt, kontakt supporten.`);
+        setError(`${err.message} - Noget gik galt, kontakt ipnordic.`);
       });
     return response;
   };

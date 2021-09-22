@@ -5,7 +5,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./Styles/PeriodForm.module.css";
+import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 
 const Period = ({ apiData }) => {
