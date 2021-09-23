@@ -11,12 +11,12 @@ const useFetchAPI = () => {
   const [company, setCompany] = useState("");
   const [queueNumber, setQueueNumber] = useState("");
 
-  const fetchData = async (userEmail, userPassword) => {
+  const fetchData = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
     const options = {
       auth: {
-        username: userEmail,
-        password: userPassword,
+        username: process.env.REACT_APP_API_USERNAME,
+        password: process.env.REACT_APP_API_PASSWORD,
       },
     };
 
