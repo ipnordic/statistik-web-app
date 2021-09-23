@@ -12,11 +12,11 @@ const Navbar = () => {
             <Button variant="contained">Home</Button>
           </Link>
         </li>
-        <li>
+        {/* <li>
           <Link to="/login">
             <Button variant="contained">Login</Button>
           </Link>
-        </li>
+        </li> */}
         <li>
           <Link to="/statistik">
             <Button variant="contained">Statistik</Button>

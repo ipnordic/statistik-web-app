@@ -1,22 +1,26 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext } from "react";
+import AuthContext from "../Context/authContext";
 
 const useFetchAPI = () => {
-  const [apiData, setApiData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [apiStatistics, setApiStatistics] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [company, setCompany] = useState("");
-  const [queueNumber, setQueueNumber] = useState("");
+  const {
+    apiStatistics,
+    startDate,
+    endDate,
+    queueNumber,
+    setApiData,
+    setLoading,
+    setError,
+    userEmail,
+    userPassword,
+  } = useContext(AuthContext);
 
   const fetchData = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
     const options = {
       auth: {
-        username: process.env.REACT_APP_API_USERNAME,
-        password: process.env.REACT_APP_API_PASSWORD,
+        username: userEmail,
+        password: userPassword,
       },
     };
 
@@ -28,32 +32,13 @@ const useFetchAPI = () => {
       );
       setLoading(null);
       response.data && setApiData(response.data);
-      console.log(response.data);
     } catch (error) {
       setLoading(false);
       setError(`Noget gik galt, kontakt ipnordic.`);
-      console.log(error);
     }
   };
 
-  return {
-    fetchData,
-    apiData,
-    loading,
-    error,
-    apiStatistics,
-    startDate,
-    endDate,
-    company,
-    queueNumber,
-    setApiStatistics,
-    setStartDate,
-    setEndDate,
-    setCompany,
-    setQueueNumber,
-    setApiData,
-    setLoading,
-  };
+  return { fetchData };
 };
 
 export default useFetchAPI;

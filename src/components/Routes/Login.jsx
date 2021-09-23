@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-// import useFetchAPI from "../../hooks/useFetchAPI";
+import React, { useContext } from "react";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useHistory } from "react-router";
 import axios from "axios";
+import AuthContext from "../../Context/authContext";
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState();
-  const [userPassword, setUserPassword] = useState();
-  // const { fetchData } = useFetchAPI();
-  const history = useHistory();
+  const {
+    userEmail,
+    userPassword,
+    setIsLoggedIn,
+    setUserEmail,
+    setUserPassword,
+    setError,
+  } = useContext(AuthContext);
 
   const loginUser = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
@@ -26,20 +29,22 @@ const Login = () => {
         `${API_URL}/v2/Period?startDate=2100-01-01&endDate=2100-01-01`,
         options
       );
-      console.log(response.data);
-      const testObj = { email: "", password: "" };
-      localStorage.setItem("testObj", JSON.stringify(testObj));
+
+      setIsLoggedIn(true);
+      setError(null);
+      return response.data;
     } catch (error) {
-      console.log(error);
+      setIsLoggedIn(false);
+      setUserEmail("");
+      setUserPassword("");
+      setError("Noget gik galt, kontakt ipnordic");
+      return error;
     }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     loginUser();
-
-    history.push("/statistik");
   };
 
   return (
