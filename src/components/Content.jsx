@@ -10,7 +10,7 @@ import AgentForm from "./Queue/AgentForm";
 import Alert from "@mui/material/Alert";
 import AgentByDay from "./Queue/AgentByDay";
 import Daily from "./Queue/Daily";
-import AuthContext from "../Context/authContext";
+import CustomContext from "../Context/CustomContext";
 import Login from "./Routes/Login";
 
 const Agent = () => {
@@ -29,7 +29,7 @@ const Agent = () => {
     isLoggedIn,
     error,
     setError,
-  } = useContext(AuthContext);
+  } = useContext(CustomContext);
   console.log(isLoggedIn);
   const { fetchData } = useFetchAPI();
 
