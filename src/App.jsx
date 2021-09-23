@@ -17,7 +17,10 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/statistik" component={Content} exact />
           <Route path="/login" component={Login} />
-          <Route path="/statistik/queuedetails/:id" component={AgentDetails} />
+          <Route
+            path="/statistik/queuedetails/:queueId"
+            component={AgentDetails}
+          />
         </Switch>
       </Router>
     </div>
