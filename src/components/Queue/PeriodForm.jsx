@@ -5,7 +5,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./Styles/PeriodForm.module.css";
+import styles from "../Styles/PeriodForm.module.css";
+import { Link } from "react-router-dom";
 
 const Period = ({ apiData }) => {
   return (
@@ -24,6 +25,7 @@ const Period = ({ apiData }) => {
                 <TableCell>Gns. Samtaletid</TableCell>
                 <TableCell>Gns. Ventetid</TableCell>
                 <TableCell>Længste ventetid</TableCell>
+                <TableCell>Information</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -39,6 +41,13 @@ const Period = ({ apiData }) => {
                     <TableCell>{item.AverageCalltime}</TableCell>
                     <TableCell>{item.AverageHoldtime}</TableCell>
                     <TableCell>{item.MaxHoldtime}</TableCell>
+                    <TableCell>
+                      <Link
+                        to={`/statistik/queuedetails/${item.QueueExtension}`}
+                      >
+                        Se mere
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>

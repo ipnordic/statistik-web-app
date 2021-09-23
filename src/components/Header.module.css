@@ -3,7 +3,9 @@
   border: 1px solid black;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 40px;
 }
 
 .Logo {
@@ -11,18 +13,27 @@
 }
 
 .Navbar {
+  display: flex;
+  justify-content: space-evenly;
   padding: 20px;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  padding: 8px;
 }
 
 .Image {
-  width: 84px;
-  height: 84px;
+  width: 64px;
+  height: 64px;
 }
 
 .HeaderTwo {
   /* border: 1px solid red; */
-  width: 50%;
-  align-items: center;
+  width: 60vw;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
