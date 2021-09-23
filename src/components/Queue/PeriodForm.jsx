@@ -7,8 +7,13 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import AuthContext from "../../Context/authContext";
+import { Button } from "@mui/material";
 
-const Period = ({ apiData }) => {
+const Period = () => {
+  const { apiData, setApiData, setLoading } = useContext(AuthContext);
+
   return (
     <div className={styles.table}>
       {apiData && (
@@ -45,7 +50,16 @@ const Period = ({ apiData }) => {
                       <Link
                         to={`/statistik/queuedetails/${item.QueueExtension}`}
                       >
-                        Se mere
+                        <Button
+                          size="small"
+                          variant="contained"
+                          onClick={() => {
+                            setApiData(null);
+                            setLoading("Henter data...");
+                          }}
+                        >
+                          Se mere
+                        </Button>
                       </Link>
                     </TableCell>
                   </TableRow>
