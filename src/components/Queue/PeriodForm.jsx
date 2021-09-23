@@ -8,11 +8,11 @@ import Paper from "@mui/material/Paper";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import AuthContext from "../../Context/authContext";
+import CustomContext from "../../Context/CustomContext";
 import { Button } from "@mui/material";
 
 const Period = () => {
-  const { apiData, setApiData, setLoading } = useContext(AuthContext);
+  const { apiData, setApiData, setLoading } = useContext(CustomContext);
 
   return (
     <div className={styles.table}>

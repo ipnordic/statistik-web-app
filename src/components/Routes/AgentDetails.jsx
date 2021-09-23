@@ -11,7 +11,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import CircularProgress from "@mui/material/CircularProgress";
 import styles from "../Styles/AgentForm.module.css";
-import AuthContext from "../../Context/authContext";
+import CustomContext from "../../Context/CustomContext";
 
 const AgentDetails = () => {
   const {
@@ -24,7 +24,7 @@ const AgentDetails = () => {
     userEmail,
     userPassword,
     loading,
-  } = useContext(AuthContext);
+  } = useContext(CustomContext);
   let { queueId } = useParams();
   const history = useHistory();
 
