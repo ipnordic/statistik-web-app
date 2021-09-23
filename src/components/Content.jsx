@@ -23,12 +23,12 @@ const Agent = () => {
     setQueueNumber,
     setStartDate,
     setEndDate,
-    apiData,
     loading,
     startDate,
     endDate,
     isLoggedIn,
     error,
+    setError,
   } = useContext(AuthContext);
   console.log(isLoggedIn);
   const { fetchData } = useFetchAPI();
@@ -38,6 +38,7 @@ const Agent = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchData();
+    setError(null);
   };
 
   const handleClick = () => {
@@ -60,9 +61,9 @@ const Agent = () => {
         <Box
           onSubmit={handleSubmit}
           component="form"
-          autoComplete="off"
+          autoComplete="on"
           sx={{
-            "& .MuiTextField-root": { m: 0.5, width: "20ch" },
+            "& .MuiTextField-root": { m: 0.5, width: "30ch" },
           }}
         >
           <TextField
@@ -83,15 +84,7 @@ const Agent = () => {
               </MenuItem>
             ))}
           </TextField>
-          {/* <TextField
-          type="text"
-          required
-          size="small"
-          variant="outlined"
-          value={company}
-          label="Kundenummer"
-          onChange={(e) => setCompany(e.target.value)}
-        /> */}
+
           {apiStatistics === "Period" ? (
             <TextField
               type="text"
@@ -157,13 +150,13 @@ const Agent = () => {
       {error && <Alert severity="error">{error}</Alert>}
 
       {apiStatistics === "Agent" ? (
-        <AgentForm apiData={apiData} />
+        <AgentForm />
       ) : apiStatistics === "Period" ? (
-        <Period apiData={apiData} />
+        <Period />
       ) : apiStatistics === "AgentByDay" ? (
-        <AgentByDay apiData={apiData} />
+        <AgentByDay />
       ) : apiStatistics === "Daily" ? (
-        <Daily apiData={apiData} />
+        <Daily />
       ) : (
         ""
       )}
