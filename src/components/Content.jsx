@@ -11,8 +11,6 @@ import AgentByDay from "./Queue/AgentByDay";
 import Daily from "./Queue/Daily";
 
 const Agent = () => {
-  const obj = localStorage.getItem("testObj");
-  console.log(JSON.parse(obj));
   const {
     apiData,
     loading,

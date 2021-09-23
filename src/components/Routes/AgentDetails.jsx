@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -11,10 +11,10 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import styles from "../Styles/AgentForm.module.css";
 
-const AgentDetails = ({ match }) => {
+const AgentDetails = () => {
   const [apiData, setApiData] = useState(null);
   const [loading, setLoading] = useState(null);
-
+  let { queueId } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -29,18 +29,18 @@ const AgentDetails = ({ match }) => {
       };
       try {
         const response = await axios(
-          `${API_URL}/v2/Agent?startDate=2021-09-21&endDate=2021-09-22&queue=${match.params.id}`,
+          `${API_URL}/v2/Agent?startDate=2021-09-21&endDate=2021-09-22&queue=${queueId}`,
           options
         );
         response.data && setApiData(response.data);
         setLoading(null);
       } catch (error) {
         setLoading(null);
-        console.log(error);
+        console.log(error.response);
       }
     };
     fetchAgentData();
-  }, [match.params.id]);
+  }, [queueId]);
 
   return (
     <div className={styles.table}>
