@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
-import AuthContext from "../../Context/authContext";
+import CustomContext from "../../Context/CustomContext";
 
 const Login = () => {
   const {
@@ -13,7 +13,7 @@ const Login = () => {
     setUserEmail,
     setUserPassword,
     setError,
-  } = useContext(AuthContext);
+  } = useContext(CustomContext);
 
   const loginUser = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
@@ -37,7 +37,7 @@ const Login = () => {
       setIsLoggedIn(false);
       setUserEmail("");
       setUserPassword("");
-      setError("Noget gik galt, kontakt ipnordic");
+      setError("Noget gik galt, prøv igen.");
       return error;
     }
   };
