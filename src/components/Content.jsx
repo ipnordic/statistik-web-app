@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -9,37 +10,35 @@ import AgentForm from "./Queue/AgentForm";
 import Alert from "@mui/material/Alert";
 import AgentByDay from "./Queue/AgentByDay";
 import Daily from "./Queue/Daily";
+import CustomContext from "../Context/CustomContext";
+import Login from "./Routes/Login";
 
 const Agent = () => {
   const {
-    apiData,
-    loading,
-    error,
-    setApiData,
     apiStatistics,
-    queueNumber,
-    startDate,
-    endDate,
-    company,
+    setApiData,
     setApiStatistics,
+    queueNumber,
+    setLoading,
+    setQueueNumber,
     setStartDate,
     setEndDate,
-    setCompany,
-    setQueueNumber,
-    setLoading,
-    fetchData,
-  } = useFetchAPI();
+    loading,
+    startDate,
+    endDate,
+    isLoggedIn,
+    error,
+    setError,
+  } = useContext(CustomContext);
+  console.log(isLoggedIn);
+  const { fetchData } = useFetchAPI();
 
-  const typeSelect = [
-    { value: "Agent", label: "Agent" },
-    { value: "Period", label: "Period" },
-    { value: "AgentByDay", label: "AgentByDay" },
-    { value: "Daily", label: "Daily" },
-  ];
+  const typeSelect = [{ value: "Period", label: "Period" }];
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchData();
+    setError(null);
   };
 
   const handleClick = () => {
@@ -58,110 +57,106 @@ const Agent = () => {
 
   return (
     <>
-      <Box
-        onSubmit={handleSubmit}
-        component="form"
-        autoComplete="off"
-        sx={{
-          "& .MuiTextField-root": { m: 0.5, width: "20ch" },
-        }}
-      >
-        <TextField
-          select
-          size="small"
-          required
-          variant="outlined"
-          value={apiStatistics}
-          label="Vælg"
-          onChange={(e) => {
-            setApiData(null);
-            setApiStatistics(e.target.value);
+      {isLoggedIn ? (
+        <Box
+          onSubmit={handleSubmit}
+          component="form"
+          autoComplete="on"
+          sx={{
+            "& .MuiTextField-root": { m: 0.5, width: "30ch" },
           }}
         >
-          {typeSelect.map((option) => (
-            <MenuItem key={Math.random()} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-        <TextField
-          type="text"
-          required
-          size="small"
-          variant="outlined"
-          value={company}
-          label="Kundenummer"
-          onChange={(e) => setCompany(e.target.value)}
-        />
-        {apiStatistics === "Period" ? (
           <TextField
-            type="text"
+            select
             size="small"
+            required
             variant="outlined"
-            value={queueNumber}
-            label="Kønummer"
-            helperText="Blankt for alle køer"
+            value={apiStatistics}
+            label="Vælg"
             onChange={(e) => {
-              setLoading(null);
-              setQueueNumber(e.target.value);
+              setApiData(null);
+              setApiStatistics(e.target.value);
             }}
-          />
-        ) : (
+          >
+            {typeSelect.map((option) => (
+              <MenuItem key={Math.random()} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          {apiStatistics === "Period" ? (
+            <TextField
+              type="text"
+              size="small"
+              variant="outlined"
+              value={queueNumber}
+              label="Kønummer"
+              helperText="Blankt for alle køer"
+              onChange={(e) => {
+                setLoading(null);
+                setQueueNumber(e.target.value);
+              }}
+            />
+          ) : (
+            <TextField
+              type="text"
+              required
+              size="small"
+              variant="outlined"
+              value={queueNumber}
+              label="Kønummer"
+              onChange={(e) => setQueueNumber(e.target.value)}
+            />
+          )}
+
           <TextField
             type="text"
             required
             size="small"
             variant="outlined"
-            value={queueNumber}
-            label="Kønummer"
-            onChange={(e) => setQueueNumber(e.target.value)}
+            value={startDate}
+            label="Start dato"
+            helperText="YYYY-MM-DD"
+            onChange={(e) => setStartDate(e.target.value)}
           />
-        )}
-
-        <TextField
-          type="text"
-          required
-          size="small"
-          variant="outlined"
-          value={startDate}
-          label="Start dato"
-          helperText="YYYY-MM-DD"
-          onChange={(e) => setStartDate(e.target.value)}
-        />
-        <TextField
-          type="text"
-          required
-          size="small"
-          variant="outlined"
-          value={endDate}
-          label="Slut dato"
-          helperText="YYYY-MM-DD"
-          onChange={(e) => setEndDate(e.target.value)}
-        />
-        <LoadingButton
-          type="submit"
-          size="large"
-          onClick={handleClick}
-          endIcon={<SendIcon />}
-          loading={loading}
-          loadingPosition="end"
-          variant="contained"
-          sx={{ m: 0.2 }}
-        >
-          Submit
-        </LoadingButton>
-      </Box>
+          <TextField
+            type="text"
+            required
+            size="small"
+            variant="outlined"
+            value={endDate}
+            label="Slut dato"
+            helperText="YYYY-MM-DD"
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+          <LoadingButton
+            type="submit"
+            size="large"
+            onClick={handleClick}
+            endIcon={<SendIcon />}
+            loading={loading}
+            loadingPosition="end"
+            variant="contained"
+            sx={{ m: 0.2 }}
+          >
+            Submit
+          </LoadingButton>
+        </Box>
+      ) : (
+        <Login />
+      )}
 
       {error && <Alert severity="error">{error}</Alert>}
 
       {apiStatistics === "Agent" ? (
-        <AgentForm apiData={apiData} />
+        <AgentForm />
       ) : apiStatistics === "Period" ? (
-        <Period apiData={apiData} />
+        <Period />
       ) : apiStatistics === "AgentByDay" ? (
-        <AgentByDay apiData={apiData} />
+        <AgentByDay />
       ) : apiStatistics === "Daily" ? (
-        <Daily apiData={apiData} />
+        <Daily />
       ) : (
         ""
       )}

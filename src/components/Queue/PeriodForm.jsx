@@ -5,9 +5,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import styles from "./Styles/PeriodForm.module.css";
+import styles from "../Styles/PeriodForm.module.css";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import CustomContext from "../../Context/CustomContext";
+import { Button } from "@mui/material";
 
-const Period = ({ apiData }) => {
+const Period = () => {
+  const { apiData, setApiData, setLoading } = useContext(CustomContext);
+
   return (
     <div className={styles.table}>
       {apiData && (
@@ -24,6 +30,7 @@ const Period = ({ apiData }) => {
                 <TableCell>Gns. Samtaletid</TableCell>
                 <TableCell>Gns. Ventetid</TableCell>
                 <TableCell>Længste ventetid</TableCell>
+                <TableCell>Information</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -39,6 +46,22 @@ const Period = ({ apiData }) => {
                     <TableCell>{item.AverageCalltime}</TableCell>
                     <TableCell>{item.AverageHoldtime}</TableCell>
                     <TableCell>{item.MaxHoldtime}</TableCell>
+                    <TableCell>
+                      <Link
+                        to={`/statistik/queuedetails/${item.QueueExtension}`}
+                      >
+                        <Button
+                          size="small"
+                          variant="contained"
+                          onClick={() => {
+                            setApiData(null);
+                            setLoading("Henter data...");
+                          }}
+                        >
+                          Se mere
+                        </Button>
+                      </Link>
+                    </TableCell>
                   </TableRow>
                 ))}
             </TableBody>
