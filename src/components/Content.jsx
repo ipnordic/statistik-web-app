@@ -29,8 +29,11 @@ const Agent = () => {
     isLoggedIn,
     error,
     setError,
+    userEmail,
+    company,
+    setCompany,
   } = useContext(CustomContext);
-  console.log(isLoggedIn);
+
   const { fetchData } = useFetchAPI();
 
   const typeSelect = [{ value: "Period", label: "Period" }];
@@ -70,7 +73,7 @@ const Agent = () => {
             select
             size="small"
             required
-            variant="outlined"
+            variant="filled"
             value={apiStatistics}
             label="Vælg"
             onChange={(e) => {
@@ -84,12 +87,27 @@ const Agent = () => {
               </MenuItem>
             ))}
           </TextField>
-
+          {userEmail.includes("@ipnordic.dk") ? (
+            <TextField
+              type="text"
+              size="small"
+              variant="filled"
+              value={company}
+              label="Kundenummer"
+              helperText="Blankt for egen ipnordic"
+              onChange={(e) => {
+                setLoading(null);
+                setCompany(e.target.value);
+              }}
+            />
+          ) : (
+            ""
+          )}
           {apiStatistics === "Period" ? (
             <TextField
               type="text"
               size="small"
-              variant="outlined"
+              variant="filled"
               value={queueNumber}
               label="Kønummer"
               helperText="Blankt for alle køer"
@@ -103,7 +121,7 @@ const Agent = () => {
               type="text"
               required
               size="small"
-              variant="outlined"
+              variant="filled"
               value={queueNumber}
               label="Kønummer"
               onChange={(e) => setQueueNumber(e.target.value)}
@@ -114,7 +132,7 @@ const Agent = () => {
             type="text"
             required
             size="small"
-            variant="outlined"
+            variant="filled"
             value={startDate}
             label="Start dato"
             helperText="YYYY-MM-DD"
@@ -124,7 +142,7 @@ const Agent = () => {
             type="text"
             required
             size="small"
-            variant="outlined"
+            variant="filled"
             value={endDate}
             label="Slut dato"
             helperText="YYYY-MM-DD"
@@ -138,9 +156,9 @@ const Agent = () => {
             loading={loading}
             loadingPosition="end"
             variant="contained"
-            sx={{ m: 0.2 }}
+            sx={{ m: 0.8 }}
           >
-            Submit
+            Søg
           </LoadingButton>
         </Box>
       ) : (
