@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CustomContext from "../../Context/CustomContext";
 import { Button } from "@mui/material";
-import Chart from "../Routes/Chart";
+import Chart from "../Chart";
 
 const Period = () => {
   const { apiData, setApiData, setLoading } = useContext(CustomContext);
