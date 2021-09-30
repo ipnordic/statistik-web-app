@@ -11,6 +11,7 @@ const CustomContext = React.createContext({
   startDate: "",
   endDate: "",
   queueNumber: "",
+  company: "",
 });
 
 export const CustomContextProvider = (props) => {
@@ -24,6 +25,7 @@ export const CustomContextProvider = (props) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [queueNumber, setQueueNumber] = useState("");
+  const [company, setCompany] = useState("");
 
   return (
     <CustomContext.Provider
@@ -48,6 +50,8 @@ export const CustomContextProvider = (props) => {
         setStartDate,
         setEndDate,
         setQueueNumber,
+        company,
+        setCompany,
       }}
     >
       {props.children}
