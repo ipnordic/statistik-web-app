@@ -57,6 +57,7 @@ const Login = () => {
       }}
     >
       <TextField
+        variant="filled"
         required
         label="Email"
         sx={{ mb: 0.8 }}
@@ -64,8 +65,9 @@ const Login = () => {
         value={userEmail}
       />
       <TextField
+        variant="filled"
         required
-        label="Password"
+        label="Kodeord"
         type="password"
         sx={{ mb: 0.8 }}
         onChange={(e) => setUserPassword(e.target.value)}
@@ -77,7 +79,7 @@ const Login = () => {
         type="submit"
         size="large"
       >
-        Login
+        Log ind
       </Button>
     </Box>
   );
