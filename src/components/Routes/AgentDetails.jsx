@@ -24,6 +24,7 @@ const AgentDetails = () => {
     userEmail,
     userPassword,
     loading,
+    company,
   } = useContext(CustomContext);
   let { queueId } = useParams();
   const history = useHistory();
@@ -40,7 +41,7 @@ const AgentDetails = () => {
       };
       try {
         const response = await axios(
-          `${API_URL}/v2/Agent?startDate=${startDate}&endDate=${endDate}&queue=${queueId}`,
+          `${API_URL}/v2/Agent?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueId}`,
           options
         );
         response.data && setApiData(response.data);
@@ -59,6 +60,7 @@ const AgentDetails = () => {
     endDate,
     userEmail,
     userPassword,
+    company,
   ]);
 
   return (
