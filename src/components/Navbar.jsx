@@ -9,7 +9,7 @@ const Navbar = () => {
       <ul className={styles.Navbar}>
         <li>
           <Link to="/">
-            <Button variant="contained">Home</Button>
+            <Button variant="contained">Hjem</Button>
           </Link>
         </li>
         {/* <li>
