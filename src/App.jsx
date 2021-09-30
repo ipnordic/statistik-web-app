@@ -5,8 +5,6 @@ import Home from "./components/Routes/Home";
 import Content from "./components/Content";
 import Login from "./components/Routes/Login";
 import AgentDetails from "./components/Routes/AgentDetails";
-import "@fontsource/roboto/400.css";
-import Chart from "./components/Routes/Chart";
 
 function App() {
   return (
@@ -22,7 +20,6 @@ function App() {
             path="/statistik/queuedetails/:queueId"
             component={AgentDetails}
           />
-          <Route path="/chart" component={Chart} />
         </Switch>
       </Router>
     </div>
