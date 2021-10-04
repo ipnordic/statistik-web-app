@@ -13,7 +13,7 @@ import { Button } from "@mui/material";
 import Chart from "../Chart";
 
 const Period = () => {
-  const { apiData, setApiData, setLoading } = useContext(CustomContext);
+  const { apiData, setApiData } = useContext(CustomContext);
 
   return (
     <div className={styles.table}>
@@ -51,11 +51,7 @@ const Period = () => {
                         <TableCell>{item.QueueExtension}</TableCell>
                         <TableCell>{item.Calls}</TableCell>
                         <TableCell>{item.AnsweredCalls}</TableCell>
-                        {item.Transfers === null ? (
-                          <TableCell>Ikke påvist</TableCell>
-                        ) : (
-                          <TableCell>{item.Transfers}</TableCell>
-                        )}
+                        <TableCell>{item.Transfers}</TableCell>
                         <TableCell>{item.Abandoned}</TableCell>
                         <TableCell>{item.AverageCalltime}</TableCell>
                         <TableCell>{item.AverageHoldtime}</TableCell>
@@ -69,7 +65,6 @@ const Period = () => {
                               variant="contained"
                               onClick={() => {
                                 setApiData(null);
-                                setLoading("Henter data...");
                               }}
                             >
                               Se mere
