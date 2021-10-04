@@ -1,0 +1,43 @@
+.Footer {
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 8%;
+  background-color: ghostwhite;
+  color: gray;
+  text-align: center;
+  border-top: 1px solid lightgray;
+}
+
+.FooterLeft {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+img {
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+}
+
+.FooterText {
+  opacity: 0.8;
+}
+
+.FooterRight {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.FooterRightSocialFB:hover {
+  opacity: 0.4;
+}
+
+.FooterRightSocialLI:hover {
+  opacity: 0.4;
+}

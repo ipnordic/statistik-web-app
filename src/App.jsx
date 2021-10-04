@@ -5,6 +5,7 @@ import Home from "./components/Routes/Home";
 import Content from "./components/Content";
 import Login from "./components/Routes/Login";
 import AgentDetails from "./components/Routes/AgentDetails";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/statistik/detaljer/:queueId" component={AgentDetails} />
         </Switch>
       </Router>
+      <Footer />
     </div>
   );
 }
