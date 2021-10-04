@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className={styles.Header}>
       <div className={styles.HeaderTwo}>
-        <a href="http://localhost:3000">
+        <a href="/">
           <img className={styles.Image} src={logo} alt="logo" />
         </a>
         <Navbar />
