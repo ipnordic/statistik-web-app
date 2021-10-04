@@ -38,35 +38,46 @@ const Period = () => {
               </TableHead>
               <TableBody>
                 {apiData &&
-                  apiData.map((item) => (
-                    <TableRow className={styles.tableHover} key={Math.random()}>
-                      <TableCell>{item.QueueName}</TableCell>
-                      <TableCell>{item.QueueExtension}</TableCell>
-                      <TableCell>{item.Calls}</TableCell>
-                      <TableCell>{item.AnsweredCalls}</TableCell>
-                      <TableCell>{item.Transfers}</TableCell>
-                      <TableCell>{item.Abandoned}</TableCell>
-                      <TableCell>{item.AverageCalltime}</TableCell>
-                      <TableCell>{item.AverageHoldtime}</TableCell>
-                      <TableCell>{item.MaxHoldtime}</TableCell>
-                      <TableCell>
-                        <Link
-                          to={`/statistik/queuedetails/${item.QueueExtension}`}
-                        >
-                          <Button
-                            size="small"
-                            variant="contained"
-                            onClick={() => {
-                              setApiData(null);
-                              setLoading("Henter data...");
-                            }}
+                  apiData
+                    .sort((a, b) => {
+                      return b.Calls - a.Calls;
+                    })
+                    .map((item) => (
+                      <TableRow
+                        className={styles.tableHover}
+                        key={Math.random()}
+                      >
+                        <TableCell>{item.QueueName}</TableCell>
+                        <TableCell>{item.QueueExtension}</TableCell>
+                        <TableCell>{item.Calls}</TableCell>
+                        <TableCell>{item.AnsweredCalls}</TableCell>
+                        {item.Transfers === null ? (
+                          <TableCell>Ikke påvist</TableCell>
+                        ) : (
+                          <TableCell>{item.Transfers}</TableCell>
+                        )}
+                        <TableCell>{item.Abandoned}</TableCell>
+                        <TableCell>{item.AverageCalltime}</TableCell>
+                        <TableCell>{item.AverageHoldtime}</TableCell>
+                        <TableCell>{item.MaxHoldtime}</TableCell>
+                        <TableCell>
+                          <Link
+                            to={`/statistik/detaljer/${item.QueueExtension}`}
                           >
-                            Se mere
-                          </Button>
-                        </Link>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                            <Button
+                              size="small"
+                              variant="contained"
+                              onClick={() => {
+                                setApiData(null);
+                                setLoading("Henter data...");
+                              }}
+                            >
+                              Se mere
+                            </Button>
+                          </Link>
+                        </TableCell>
+                      </TableRow>
+                    ))}
               </TableBody>
             </Table>
           </TableContainer>
