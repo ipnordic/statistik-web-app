@@ -16,10 +16,7 @@ function App() {
           <Route path="/" component={Home} exact />
           <Route path="/statistik" component={Content} exact />
           <Route path="/login" component={Login} />
-          <Route
-            path="/statistik/queuedetails/:queueId"
-            component={AgentDetails}
-          />
+          <Route path="/statistik/detaljer/:queueId" component={AgentDetails} />
         </Switch>
       </Router>
     </div>
