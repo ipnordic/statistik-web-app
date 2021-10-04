@@ -30,7 +30,7 @@ const AgentDetails = () => {
   const history = useHistory();
 
   useEffect(() => {
-    setLoading("Henter data...");
+    setLoading(true);
     const fetchAgentData = async () => {
       const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
       const options = {
