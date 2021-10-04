@@ -94,7 +94,7 @@ const Agent = () => {
               variant="filled"
               value={company}
               label="Kundenummer"
-              helperText="Blankt for egen ipnordic"
+              helperText="Blankt for ipnordic"
               onChange={(e) => {
                 setLoading(null);
                 setCompany(e.target.value);
