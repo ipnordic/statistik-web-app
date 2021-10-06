@@ -53,7 +53,7 @@ const Login = () => {
       component="form"
       autoComplete="off"
       sx={{
-        "& .MuiTextField-root": { m: 0.5, width: "20ch" },
+        "& .MuiTextField-root": { m: 0.5, width: "35ch" },
       }}
     >
       <TextField
