@@ -16,22 +16,6 @@ const useFetchAPI = () => {
     company,
   } = useContext(CustomContext);
 
-  // function setCharAt(str, index, chr) {
-  //   if (index > str.length - 1) return str;
-  //   return str.substring(0, index) + chr + str.substring(index + 1);
-  // }
-
-  // String.prototype.setCharAt = setCharAt;
-  // const toNumber = (number) => {
-  //   let sliceNum = number.slice(8, 10);
-  //   let convertToNumber = Number(sliceNum);
-  //   let increaseNumByOne = convertToNumber + 1;
-  //   const convertToString = increaseNumByOne.toString();
-
-  //   const replaceNum = number.setCharAt(number, 8, convertToString);
-  //   console.log(replaceNum);
-  // };
-  // toNumber(startDate);
   const fetchData = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
     const options = {
