@@ -1,11 +1,12 @@
 .table {
   width: auto;
   padding: 8px;
+  padding-bottom: 6rem;
   margin-bottom: 40px;
 }
 
 .tableHover:hover {
-  background-color: #00641634;
+  background-color: #00641610;
 }
 
 h3 {

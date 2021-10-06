@@ -1,5 +1,5 @@
 @import-normalize;
-@import "@fontsource/roboto/400.css";
+@import "@fontsource/roboto";
 
 * {
   margin: 0;
