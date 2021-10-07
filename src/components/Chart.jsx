@@ -9,7 +9,7 @@ const Chart = () => {
   return (
     <div className={styles.Chart}>
       {apiData && (
-        <BarChart width={1200} height={400} data={apiData}>
+        <BarChart width={1620} height={400} data={apiData}>
           <Bar dataKey="Calls" fill="#31644a" />
           <CartesianGrid strokeDashArray="4 1 2" />
           <XAxis
