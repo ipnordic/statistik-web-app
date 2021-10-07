@@ -5,7 +5,7 @@ export const totalCalls = (data) => {
     numbers.reduce(function (sum, number) {
       const updatedSum = sum + number;
       return updatedSum;
-    });
+    }, 0);
   return sumNumbers;
 };
 
@@ -16,7 +16,7 @@ export const totalAnsweredCalls = (data) => {
     answeredNumbers.reduce(function (sum, number) {
       const updatedSum = sum + number;
       return updatedSum;
-    });
+    }, 0);
 
   return sumAnsweredNumbers;
 };
@@ -28,7 +28,7 @@ export const totalTransfers = (data) => {
     transferedNumbers.reduce(function (sum, number) {
       const updatedSum = sum + number;
       return updatedSum;
-    });
+    }, 0);
 
   return sumTransferedNumbers;
 };
@@ -40,7 +40,7 @@ export const totalAbandoned = (data) => {
     abandonedNumbers.reduce(function (sum, number) {
       const updatedSum = sum + number;
       return updatedSum;
-    });
+    }, 0);
 
   return sumAbandonedNumbers;
 };
