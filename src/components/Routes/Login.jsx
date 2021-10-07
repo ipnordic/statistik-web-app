@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
+import { Alert, Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import CustomContext from "../../Context/CustomContext";
@@ -13,6 +13,7 @@ const Login = () => {
     setUserEmail,
     setUserPassword,
     setError,
+    error,
   } = useContext(CustomContext);
 
   const loginUser = async () => {
@@ -48,40 +49,43 @@ const Login = () => {
   };
 
   return (
-    <Box
-      onSubmit={handleSubmit}
-      component="form"
-      autoComplete="off"
-      sx={{
-        "& .MuiTextField-root": { m: 0.5, width: "35ch" },
-      }}
-    >
-      <TextField
-        variant="filled"
-        required
-        label="Email"
-        sx={{ mb: 0.8 }}
-        onChange={(e) => setUserEmail(e.target.value)}
-        value={userEmail}
-      />
-      <TextField
-        variant="filled"
-        required
-        label="Kodeord"
-        type="password"
-        sx={{ mb: 0.8 }}
-        onChange={(e) => setUserPassword(e.target.value)}
-        value={userPassword}
-      />
-      <Button
-        variant="contained"
-        sx={{ p: 1, mt: 1.2 }}
-        type="submit"
-        size="large"
+    <>
+      <Box
+        onSubmit={handleSubmit}
+        component="form"
+        autoComplete="off"
+        sx={{
+          "& .MuiTextField-root": { m: 0.5, width: "35ch" },
+        }}
       >
-        Log ind
-      </Button>
-    </Box>
+        <TextField
+          variant="filled"
+          required
+          label="Email"
+          sx={{ mb: 0.8 }}
+          onChange={(e) => setUserEmail(e.target.value)}
+          value={userEmail}
+        />
+        <TextField
+          variant="filled"
+          required
+          label="Kodeord"
+          type="password"
+          sx={{ mb: 0.8 }}
+          onChange={(e) => setUserPassword(e.target.value)}
+          value={userPassword}
+        />
+        <Button
+          variant="contained"
+          sx={{ p: 1, mt: 1.2 }}
+          type="submit"
+          size="large"
+        >
+          Log ind
+        </Button>
+      </Box>
+      {error && <Alert severity="error">{error}</Alert>}
+    </>
   );
 };
 
