@@ -9,7 +9,7 @@ import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CustomContext from "../../Context/CustomContext";
-import { Alert, AlertTitle, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import Chart from "../Chart";
 import {
   totalCalls,
@@ -32,93 +32,84 @@ const Period = () => {
         <>
           {apiData.length > 0 ? <Chart /> : ""}
           {apiData.length > 0 ? (
-            <TableContainer
-              sx={{ maxHeight: 540, width: "100%" }}
-              component={Paper}
-            >
-              <Table
-                style={{ textAlign: "center" }}
-                stickyHeader
-                aria-label="queue data table"
-              >
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Kønavn</TableCell>
-                    <TableCell>Kønummer</TableCell>
-                    <TableCell>Kald</TableCell>
-                    <TableCell>Besvaret kald</TableCell>
-                    <TableCell>Omstillet</TableCell>
-                    <TableCell>Frafald</TableCell>
-                    <TableCell>Gns. Samtaletid</TableCell>
-                    <TableCell>Gns. Ventetid</TableCell>
-                    <TableCell>Længste ventetid</TableCell>
-                    <TableCell>Information</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {apiData &&
-                    apiData
-                      .sort((a, b) => {
-                        return b.Calls - a.Calls;
-                      })
-                      .map((item) => (
-                        <TableRow
-                          className={styles.tableHover}
-                          key={Math.random()}
-                        >
-                          <TableCell>{item.QueueName}</TableCell>
-                          <TableCell>{item.QueueExtension}</TableCell>
-                          <TableCell>{item.Calls}</TableCell>
-                          <TableCell>{item.AnsweredCalls}</TableCell>
-                          <TableCell>{item.Transfers}</TableCell>
-                          <TableCell>{item.Abandoned}</TableCell>
-                          <TableCell>{item.AverageCalltime}</TableCell>
-                          <TableCell>{item.AverageHoldtime}</TableCell>
-                          <TableCell>{item.MaxHoldtime}</TableCell>
-                          <TableCell>
-                            <Link
-                              to={`/statistik/detaljer/${item.QueueExtension}`}
-                            >
-                              <Button
-                                size="small"
-                                variant="contained"
-                                onClick={() => {
-                                  setApiData(null);
-                                }}
+            <Paper elevation={8}>
+              <TableContainer sx={{ width: "100%" }}>
+                <Table aria-label="queue data table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Kønavn</TableCell>
+                      <TableCell>Kønummer</TableCell>
+                      <TableCell>Antal kald</TableCell>
+                      <TableCell>Besvaret</TableCell>
+                      <TableCell>Omstillet</TableCell>
+                      <TableCell>Frafald</TableCell>
+                      <TableCell>Gns. Samtaletid</TableCell>
+                      <TableCell>Gns. Ventetid</TableCell>
+                      <TableCell>Længste ventetid</TableCell>
+                      <TableCell>Information</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {apiData &&
+                      apiData
+                        .sort((a, b) => {
+                          return b.Calls - a.Calls;
+                        })
+                        .map((item) => (
+                          <TableRow
+                            className={styles.tableHover}
+                            key={Math.random()}
+                          >
+                            <TableCell>{item.QueueName}</TableCell>
+                            <TableCell>{item.QueueExtension}</TableCell>
+                            <TableCell>{item.Calls}</TableCell>
+                            <TableCell>{item.AnsweredCalls}</TableCell>
+                            <TableCell>{item.Transfers}</TableCell>
+                            <TableCell>{item.Abandoned}</TableCell>
+                            <TableCell>{item.AverageCalltime}</TableCell>
+                            <TableCell>{item.AverageHoldtime}</TableCell>
+                            <TableCell>{item.MaxHoldtime}</TableCell>
+                            <TableCell>
+                              <Link
+                                to={`/statistik/detaljer/${item.QueueExtension}`}
                               >
-                                Se mere
-                              </Button>
-                            </Link>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                  <TableRow>
-                    <TableCell>
-                      <strong>Total</strong>
-                    </TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>
-                      <strong>{tableTotalCalls}</strong>
-                    </TableCell>
-                    <TableCell>
-                      <strong>{tableTotalAnsweredCalls}</strong>
-                    </TableCell>
-                    <TableCell>
-                      <strong>{tableTotalTransfers}</strong>
-                    </TableCell>
-                    <TableCell>
-                      <strong>{tableTotalAbandoned}</strong>
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
+                                <Button
+                                  size="small"
+                                  variant="contained"
+                                  onClick={() => {
+                                    setApiData(null);
+                                  }}
+                                >
+                                  Se mere
+                                </Button>
+                              </Link>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    <TableRow>
+                      <TableCell>
+                        <strong>Total</strong>
+                      </TableCell>
+                      <TableCell></TableCell>
+                      <TableCell>
+                        <strong>{tableTotalCalls}</strong>
+                      </TableCell>
+                      <TableCell>
+                        <strong>{tableTotalAnsweredCalls}</strong>
+                      </TableCell>
+                      <TableCell>
+                        <strong>{tableTotalTransfers}</strong>
+                      </TableCell>
+                      <TableCell>
+                        <strong>{tableTotalAbandoned}</strong>
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
           ) : (
-            <Alert severity="info">
-              <AlertTitle>Info</AlertTitle>
-              <strong>Slut datoen</strong> skal være minimum én dag foran{" "}
-              <strong>Start datoen!</strong>
-            </Alert>
+            ""
           )}
         </>
       )}
