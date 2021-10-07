@@ -11,9 +11,20 @@ import { useContext } from "react";
 import CustomContext from "../../Context/CustomContext";
 import { Alert, AlertTitle, Button } from "@mui/material";
 import Chart from "../Chart";
+import {
+  totalCalls,
+  totalAnsweredCalls,
+  totalTransfers,
+  totalAbandoned,
+} from "../../helpers/calcTotal";
 
 const Period = () => {
   const { apiData, setApiData } = useContext(CustomContext);
+
+  const tableTotalCalls = totalCalls(apiData);
+  const tableTotalAnsweredCalls = totalAnsweredCalls(apiData);
+  const tableTotalTransfers = totalTransfers(apiData);
+  const tableTotalAbandoned = totalAbandoned(apiData);
 
   return (
     <div className={styles.table}>
@@ -21,8 +32,15 @@ const Period = () => {
         <>
           {apiData.length > 0 ? <Chart /> : ""}
           {apiData.length > 0 ? (
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="queue data table">
+            <TableContainer
+              sx={{ maxHeight: 540, width: "100%" }}
+              component={Paper}
+            >
+              <Table
+                style={{ textAlign: "center" }}
+                stickyHeader
+                aria-label="queue data table"
+              >
                 <TableHead>
                   <TableRow>
                     <TableCell>Kønavn</TableCell>
@@ -74,6 +92,24 @@ const Period = () => {
                           </TableCell>
                         </TableRow>
                       ))}
+                  <TableRow>
+                    <TableCell>
+                      <strong>Total</strong>
+                    </TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>
+                      <strong>{tableTotalCalls}</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>{tableTotalAnsweredCalls}</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>{tableTotalTransfers}</strong>
+                    </TableCell>
+                    <TableCell>
+                      <strong>{tableTotalAbandoned}</strong>
+                    </TableCell>
+                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
