@@ -19,7 +19,7 @@ import {
 } from "../../helpers/calcTotal";
 
 const Period = () => {
-  const { apiData, setApiData } = useContext(CustomContext);
+  const { apiData, setApiData, queueNumber } = useContext(CustomContext);
 
   const tableTotalCalls = totalCalls(apiData);
   const tableTotalAnsweredCalls = totalAnsweredCalls(apiData);
@@ -86,24 +86,28 @@ const Period = () => {
                             </TableCell>
                           </TableRow>
                         ))}
-                    <TableRow>
-                      <TableCell>
-                        <strong>Total</strong>
-                      </TableCell>
-                      <TableCell></TableCell>
-                      <TableCell>
-                        <strong>{tableTotalCalls}</strong>
-                      </TableCell>
-                      <TableCell>
-                        <strong>{tableTotalAnsweredCalls}</strong>
-                      </TableCell>
-                      <TableCell>
-                        <strong>{tableTotalTransfers}</strong>
-                      </TableCell>
-                      <TableCell>
-                        <strong>{tableTotalAbandoned}</strong>
-                      </TableCell>
-                    </TableRow>
+                    {queueNumber === "" ? (
+                      <TableRow>
+                        <TableCell>
+                          <strong>Total</strong>
+                        </TableCell>
+                        <TableCell></TableCell>
+                        <TableCell>
+                          <strong>{tableTotalCalls}</strong>
+                        </TableCell>
+                        <TableCell>
+                          <strong>{tableTotalAnsweredCalls}</strong>
+                        </TableCell>
+                        <TableCell>
+                          <strong>{tableTotalTransfers}</strong>
+                        </TableCell>
+                        <TableCell>
+                          <strong>{tableTotalAbandoned}</strong>
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      ""
+                    )}
                   </TableBody>
                 </Table>
               </TableContainer>
