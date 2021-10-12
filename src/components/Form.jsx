@@ -37,20 +37,6 @@ const Form = () => {
     setError(null);
   };
 
-  const handleClick = () => {
-    if (apiStatistics.length <= 0) {
-      return;
-    } else if (queueNumber.length <= 0) {
-      return;
-    } else if (startDate.length <= 0) {
-      return;
-    } else if (endDate.length <= 0) {
-      return;
-    } else {
-      setLoading(true);
-    }
-  };
-
   return (
     <>
       <Box
@@ -153,7 +139,6 @@ const Form = () => {
           <LoadingButton
             type="submit"
             size="large"
-            onClick={handleClick}
             endIcon={<SendIcon />}
             loading={loading}
             loadingPosition="end"
