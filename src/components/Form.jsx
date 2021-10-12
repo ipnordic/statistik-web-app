@@ -55,7 +55,6 @@ const Form = () => {
           value={apiStatistics}
           label="Vælg"
           onChange={(e) => {
-            setApiData(null);
             setApiStatistics(e.target.value);
           }}
         >
@@ -74,7 +73,6 @@ const Form = () => {
             label="Kundenummer"
             helperText="Blankt for ipnordic"
             onChange={(e) => {
-              setLoading(null);
               setCompany(e.target.value);
             }}
           />
@@ -90,7 +88,6 @@ const Form = () => {
             label="Kønummer"
             helperText="Blankt for alle køer"
             onChange={(e) => {
-              setLoading(null);
               setQueueNumber(e.target.value);
             }}
           />
