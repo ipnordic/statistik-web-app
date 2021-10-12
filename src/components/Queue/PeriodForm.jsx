@@ -30,7 +30,7 @@ const Period = () => {
     <div className={styles.table}>
       {apiData && (
         <>
-          {apiData.length > 0 ? <Chart /> : ""}
+          {queueNumber === "" ? <Chart /> : ""}
           {apiData.length > 0 ? (
             <Paper elevation={8}>
               <TableContainer sx={{ width: "100%" }}>
