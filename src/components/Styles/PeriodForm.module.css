@@ -1,9 +1,9 @@
 .table {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  padding: 10px;
-  padding-bottom: 8rem;
+  align-items: center;
+  width: auto;
+  padding-bottom: 5rem;
   margin: 5px;
 }
 
