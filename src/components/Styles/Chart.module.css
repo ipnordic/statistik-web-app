@@ -1,4 +1,8 @@
 .Chart {
-  padding-bottom: 2rem;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 1rem;
+  width: auto;
+  margin-right: 3rem;
 }
