@@ -4,7 +4,6 @@ import CustomContext from "../Context/CustomContext";
 
 const useFetchAPI = () => {
   const {
-    apiStatistics,
     startDate,
     endDate,
     queueNumber,
@@ -28,7 +27,7 @@ const useFetchAPI = () => {
     try {
       setLoading(true);
       const response = await axios(
-        `${API_URL}/v2/${apiStatistics}?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
+        `${API_URL}/v2/Period?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
         options
       );
       setLoading(null);

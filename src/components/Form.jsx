@@ -1,7 +1,6 @@
 import LoadingButton from "@mui/lab/LoadingButton";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
 import SendIcon from "@mui/icons-material/Send";
 import { useContext } from "react";
 import CustomContext from "../Context/CustomContext";
@@ -10,10 +9,8 @@ import { Alert, AlertTitle } from "@mui/material";
 
 const Form = () => {
   const {
-    apiStatistics,
     startDate,
     endDate,
-    setApiStatistics,
     userEmail,
     company,
     loading,
@@ -26,8 +23,6 @@ const Form = () => {
     error,
   } = useContext(CustomContext);
   const { fetchData } = useFetchAPI();
-
-  const typeSelect = [{ value: "Period", label: "Period" }];
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,23 +40,6 @@ const Form = () => {
           "& .MuiTextField-root": { m: 0.5, width: "30ch" },
         }}
       >
-        <TextField
-          select
-          size="small"
-          required
-          variant="filled"
-          value={apiStatistics}
-          label="Vælg"
-          onChange={(e) => {
-            setApiStatistics(e.target.value);
-          }}
-        >
-          {typeSelect.map((option) => (
-            <MenuItem key={Math.random()} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
         {userEmail.includes("@ipnordic.dk") ? (
           <TextField
             type="text"
@@ -77,30 +55,17 @@ const Form = () => {
         ) : (
           ""
         )}
-        {apiStatistics === "Period" ? (
-          <TextField
-            type="text"
-            size="small"
-            variant="filled"
-            value={queueNumber}
-            label="Kønummer"
-            helperText="Blankt for alle køer"
-            onChange={(e) => {
-              setQueueNumber(e.target.value);
-            }}
-          />
-        ) : (
-          <TextField
-            type="text"
-            required
-            size="small"
-            variant="filled"
-            value={queueNumber}
-            label="Kønummer"
-            onChange={(e) => setQueueNumber(e.target.value)}
-          />
-        )}
-
+        <TextField
+          type="text"
+          size="small"
+          variant="filled"
+          value={queueNumber}
+          label="Kønummer"
+          helperText="Blankt for alle køer"
+          onChange={(e) => {
+            setQueueNumber(e.target.value);
+          }}
+        />
         <TextField
           type="text"
           required
