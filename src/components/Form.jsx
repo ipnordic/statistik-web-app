@@ -121,7 +121,17 @@ const Form = () => {
           helperText="YYYY-MM-DD"
           onChange={(e) => setEndDate(e.target.value)}
         />
+
         {endDate && endDate.includes(startDate) ? (
+          <LoadingButton
+            disabled
+            size="large"
+            variant="contained"
+            sx={{ m: 0.8 }}
+          >
+            Søg
+          </LoadingButton>
+        ) : endDate < startDate ? (
           <LoadingButton
             disabled
             size="large"
@@ -145,6 +155,7 @@ const Form = () => {
         )}
       </Box>
       {error && <Alert severity="error">{error}</Alert>}
+
       {endDate && endDate.includes(startDate) ? (
         <Alert severity="warning">
           <AlertTitle>Info</AlertTitle>
