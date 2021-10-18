@@ -1,11 +1,17 @@
-import LoadingButton from "@mui/lab/LoadingButton";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import SendIcon from "@mui/icons-material/Send";
 import { useContext } from "react";
 import CustomContext from "../Context/CustomContext";
 import useFetchAPI from "../hooks/useFetchAPI";
-import { Alert, AlertTitle } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import styles from "./Styles/Form.module.css";
+
+const schema = yup.object({
+  company: yup.string(),
+  queueNumber: yup.string(),
+  startDate: yup.string().required("Dette felt skal udfyldes!"),
+  endDate: yup.string().required("Dette felt skal udfyldes!"),
+});
 
 const Form = () => {
   const {
@@ -24,113 +30,79 @@ const Form = () => {
   } = useContext(CustomContext);
   const { fetchData } = useFetchAPI();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    fetchData();
+  const {
+    register,
+    handleSubmit,
+
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data) => {
+    fetchData(data);
     setError(null);
   };
 
   return (
-    <>
-      <Box
-        onSubmit={handleSubmit}
-        component="form"
-        autoComplete="on"
-        sx={{
-          "& .MuiTextField-root": { m: 0.5, width: "30ch" },
-        }}
-      >
+    <div className={styles.Container}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         {userEmail.includes("@ipnordic.dk") ? (
-          <TextField
-            type="text"
-            size="small"
-            variant="filled"
-            value={company}
-            label="Kundenummer"
-            helperText="Blankt for ipnordic"
-            onChange={(e) => {
-              setCompany(e.target.value);
-            }}
-          />
+          <>
+            <input
+              className={styles.FormInput}
+              type="text"
+              name="company"
+              placeholder="Kundenummer"
+              {...register("company", { value: company })}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+            <div>{errors.company?.message}</div>
+          </>
         ) : (
           ""
         )}
-        <TextField
+
+        <input
+          className={styles.FormInput}
           type="text"
-          size="small"
-          variant="filled"
-          value={queueNumber}
-          label="Kønummer"
-          helperText="Blankt for alle køer"
-          onChange={(e) => {
-            setQueueNumber(e.target.value);
-          }}
+          name="queueNumber"
+          placeholder="Kønummer"
+          {...register("queueNumber", { value: queueNumber })}
+          onChange={(e) => setQueueNumber(e.target.value)}
         />
-        <TextField
+        <div>{errors.queueNumber?.message}</div>
+        <input
+          className={styles.FormInput}
           type="text"
-          required
-          size="small"
-          variant="filled"
-          value={startDate}
-          label="Start dato"
-          helperText="YYYY-MM-DD"
+          name="startDate"
+          placeholder="Start dato"
+          {...register("startDate", { value: startDate })}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <TextField
+        <div>{errors.startDate?.message}</div>
+        <input
+          className={styles.FormInput}
           type="text"
-          required
-          size="small"
-          variant="filled"
-          value={endDate}
-          label="Slut dato"
-          helperText="YYYY-MM-DD"
+          name="endDate"
+          placeholder="Slut dato"
+          {...register("endDate", { value: endDate })}
           onChange={(e) => setEndDate(e.target.value)}
         />
-
-        {endDate && endDate.includes(startDate) ? (
-          <LoadingButton
-            disabled
-            size="large"
-            variant="contained"
-            sx={{ m: 0.8 }}
-          >
-            Søg
-          </LoadingButton>
-        ) : endDate < startDate ? (
-          <LoadingButton
-            disabled
-            size="large"
-            variant="contained"
-            sx={{ m: 0.8 }}
-          >
-            Søg
-          </LoadingButton>
-        ) : (
-          <LoadingButton
-            type="submit"
-            size="large"
-            endIcon={<SendIcon />}
-            loading={loading}
-            loadingPosition="end"
-            variant="contained"
-            sx={{ m: 0.8 }}
-          >
-            Søg
-          </LoadingButton>
-        )}
-      </Box>
-      {error && <Alert severity="error">{error}</Alert>}
-
+        <div>{errors.endDate?.message}</div>
+        <input type="submit" value="Søg" />
+      </form>
+      {error && <div>{error}</div>}
+      {loading && <div>{loading}</div>}
       {endDate && endDate.includes(startDate) ? (
-        <Alert severity="warning">
-          <AlertTitle>Info</AlertTitle>
-          <strong>Slut datoen</strong> skal være minimum én dag foran{" "}
+        <div>
+          <strong>Slut datoen</strong> skal være minimum én daf foran{" "}
           <strong>Start datoen!</strong>
-        </Alert>
+        </div>
       ) : (
         ""
       )}
-    </>
+    </div>
   );
 };
 
