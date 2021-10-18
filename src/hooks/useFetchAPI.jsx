@@ -25,12 +25,12 @@ const useFetchAPI = () => {
     };
 
     try {
-      setLoading(true);
+      setLoading("Henter data...");
       const response = await axios(
         `${API_URL}/v2/Period?startDate=${startDate}&endDate=${endDate}&company=${company}&queue=${queueNumber}`,
         options
       );
-      setLoading(null);
+      setLoading(false);
       response.data && setApiData(response.data);
     } catch (error) {
       setLoading(false);
