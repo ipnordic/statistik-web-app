@@ -91,6 +91,7 @@ const Form = () => {
           <LoadingButton
             disabled
             size="large"
+            endIcon={<SendIcon />}
             variant="contained"
             sx={{ m: 0.8 }}
           >
@@ -100,6 +101,7 @@ const Form = () => {
           <LoadingButton
             disabled
             size="large"
+            endIcon={<SendIcon />}
             variant="contained"
             sx={{ m: 0.8 }}
           >
