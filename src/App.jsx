@@ -6,6 +6,9 @@ import Content from "./components/Content";
 import Login from "./components/Routes/Login";
 import AgentDetails from "./components/Routes/AgentDetails";
 import Footer from "./components/Footer";
+import "semantic-ui-css/semantic.min.css";
+import LogRocket from "logrocket";
+LogRocket.init("xnegd5/ipnordic-statistik");
 
 function App() {
   return (

@@ -5,10 +5,8 @@ import App from "./App";
 import { CustomContextProvider } from "./Context/CustomContext";
 
 ReactDOM.render(
-  <React.StrictMode>
-    <CustomContextProvider>
-      <App />
-    </CustomContextProvider>
-  </React.StrictMode>,
+  <CustomContextProvider>
+    <App />
+  </CustomContextProvider>,
   document.getElementById("root")
 );
