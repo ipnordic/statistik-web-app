@@ -53,6 +53,7 @@ const Form = () => {
             type="text"
             name="company"
             id="company"
+            autoComplete="off"
             placeholder="Kundenummer"
             {...register("company", { value: company })}
             onChange={(e) => setCompany(e.target.value)}
@@ -66,6 +67,7 @@ const Form = () => {
           name="queueNumber"
           id="queueNumber"
           placeholder="Kønummer"
+          autoComplete="off"
           {...register("queueNumber", { value: queueNumber })}
           onChange={(e) => setQueueNumber(e.target.value)}
         />
@@ -75,6 +77,7 @@ const Form = () => {
           type="text"
           name="startDate"
           id="startDate"
+          autoComplete="off"
           placeholder={
             errors.startDate ? errors.startDate?.message : "Start dato"
           }
@@ -86,6 +89,7 @@ const Form = () => {
           type="text"
           name="endDate"
           id="endDate"
+          autoComplete="off"
           placeholder={errors.endDate ? errors.endDate?.message : "Slut dato"}
           {...register("endDate", { value: endDate })}
           onChange={(e) => setEndDate(e.target.value)}
