@@ -15,6 +15,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "logrocket": "^2.1.1",
+    "logrocket-react": "^4.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.17.4",
