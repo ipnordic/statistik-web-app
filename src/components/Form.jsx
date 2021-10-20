@@ -96,13 +96,21 @@ const Form = () => {
         />
 
         {endDate.includes(startDate) ? (
-          <Button disabled>Søg</Button>
+          <Button size="large" disabled>
+            Søg
+          </Button>
         ) : startDate.length < 0 && endDate.length < 0 ? (
-          <Button disabled>Søg</Button>
+          <Button size="large" disabled>
+            Søg
+          </Button>
         ) : endDate < startDate ? (
-          <Button disabled>Søg</Button>
+          <Button size="large" disabled>
+            Søg
+          </Button>
         ) : (
-          <Button primary>Søg</Button>
+          <Button size="large" primary>
+            Søg
+          </Button>
         )}
       </form>
       {error && (
