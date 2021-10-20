@@ -9,14 +9,9 @@ const Navbar = () => {
   return (
     <nav>
       <ul className={styles.Navbar}>
-        <li>
-          <Link to="/">
-            <Button variant="contained">Forside</Button>
-          </Link>
-        </li>
         {!isLoggedIn ? (
           <li>
-            <Link to="/statistik">
+            <Link to="/">
               <Button variant="contained">Statistik</Button>
             </Link>
           </li>
