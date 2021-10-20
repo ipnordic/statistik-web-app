@@ -12,7 +12,7 @@
   border-top: 1px solid lightgray;
 }
 
-.FooterLeft {
+.Left {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,20 +24,20 @@ img {
   margin-right: 10px;
 }
 
-.FooterText {
+.Text {
   opacity: 0.8;
 }
 
-.FooterRight {
+.Right {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.FooterRightSocialFB:hover {
+.SocialFB:hover {
   opacity: 0.4;
 }
 
-.FooterRightSocialLI:hover {
+.SocialLI:hover {
   opacity: 0.4;
 }
