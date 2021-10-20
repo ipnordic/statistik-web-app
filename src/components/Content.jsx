@@ -11,7 +11,7 @@ const Agent = () => {
     <>
       {isLoggedIn ? <Form /> : <Login />}
 
-      <Period />
+      {isLoggedIn ? <Period /> : ""}
     </>
   );
 };
