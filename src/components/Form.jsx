@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./Styles/Form.module.css";
+import { Button, Message, Loader, Dimmer } from "semantic-ui-react";
 
 const schema = yup.object({
   company: yup.string(),
@@ -40,64 +41,90 @@ const Form = () => {
   });
 
   const onSubmit = (data) => {
-    fetchData(data);
+    fetchData();
     setError(null);
   };
 
   return (
-    <div className={styles.Container}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className={styles.formContainer}>
+      <form className={styles.formInline} onSubmit={handleSubmit(onSubmit)}>
         {userEmail.includes("@ipnordic.dk") ? (
-          <>
-            <input
-              className={styles.FormInput}
-              type="text"
-              name="company"
-              placeholder="Kundenummer"
-              {...register("company", { value: company })}
-              onChange={(e) => setCompany(e.target.value)}
-            />
-            <div>{errors.company?.message}</div>
-          </>
+          <input
+            type="text"
+            name="company"
+            id="company"
+            placeholder="Kundenummer"
+            {...register("company", { value: company })}
+            onChange={(e) => setCompany(e.target.value)}
+          />
         ) : (
           ""
         )}
 
         <input
-          className={styles.FormInput}
           type="text"
           name="queueNumber"
+          id="queueNumber"
           placeholder="Kønummer"
           {...register("queueNumber", { value: queueNumber })}
           onChange={(e) => setQueueNumber(e.target.value)}
         />
-        <div>{errors.queueNumber?.message}</div>
+        {errors.queueNumber?.message}
+
         <input
-          className={styles.FormInput}
           type="text"
           name="startDate"
-          placeholder="Start dato"
+          id="startDate"
+          placeholder={
+            errors.startDate ? errors.startDate?.message : "Start dato"
+          }
           {...register("startDate", { value: startDate })}
           onChange={(e) => setStartDate(e.target.value)}
         />
-        <div>{errors.startDate?.message}</div>
+
         <input
-          className={styles.FormInput}
           type="text"
           name="endDate"
-          placeholder="Slut dato"
+          id="endDate"
+          placeholder={errors.endDate ? errors.endDate?.message : "Slut dato"}
           {...register("endDate", { value: endDate })}
           onChange={(e) => setEndDate(e.target.value)}
         />
-        <div>{errors.endDate?.message}</div>
-        <input type="submit" value="Søg" />
+
+        {endDate.includes(startDate) ? (
+          <Button disabled>Søg</Button>
+        ) : startDate.length < 0 && endDate.length < 0 ? (
+          <Button disabled>Søg</Button>
+        ) : endDate < startDate ? (
+          <Button disabled>Søg</Button>
+        ) : (
+          <Button primary>Søg</Button>
+        )}
       </form>
-      {error && <div>{error}</div>}
-      {loading && <div>{loading}</div>}
+      {error && (
+        <div>
+          <Message negative>
+            <Message.Header>Fejl!</Message.Header>
+            <span>{error}</span>
+          </Message>
+        </div>
+      )}
+      {loading && (
+        <div>
+          <Dimmer active>
+            <Loader size="large" active inline="centered">
+              {loading}
+            </Loader>
+          </Dimmer>
+        </div>
+      )}
       {endDate && endDate.includes(startDate) ? (
         <div>
-          <strong>Slut datoen</strong> skal være minimum én daf foran{" "}
-          <strong>Start datoen!</strong>
+          <Message warning>
+            <Message.Header>Vigtigt!</Message.Header>
+            <strong>Slut datoen</strong> skal være minimum én dag foran{" "}
+            <strong>Start datoen!</strong>
+          </Message>
         </div>
       ) : (
         ""
