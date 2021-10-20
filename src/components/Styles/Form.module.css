@@ -1,21 +1,36 @@
-.FormContainer {
-  display: flex;
-  flex-direction: row;
-  width: auto;
-  height: auto;
+.formContainer {
+  display: block;
+  text-align: center;
 }
 
-input[type="text"].FormInput {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+.formInline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.formInline input {
+  /* vertical-align: middle; */
+  margin: 5px 10px 5px 0;
+  padding: 10px;
   box-sizing: border-box;
-  border: 3px solid #ccc;
+  border: 3px solid #31644a7e;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   outline: none;
 }
 
-input[type="text"].FormInput:focus {
-  border: 3px solid #555;
+.formInline input:focus {
+  border: 3px solid #31644a;
 }
+
+/* .formInline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+}
+
+.formInline button:hover {
+  background-color: royalblue;
+} */
