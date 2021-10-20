@@ -1,0 +1,36 @@
+.formContainer {
+  display: block;
+  text-align: center;
+}
+
+.formInline {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.formInline input {
+  /* vertical-align: middle; */
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 3px solid #31644a7e;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+.formInline input:focus {
+  border: 3px solid #31644a;
+}
+
+/* .formInline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+}
+
+.formInline button:hover {
+  background-color: royalblue;
+} */
