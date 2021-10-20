@@ -1,0 +1,28 @@
+.input input {
+  width: 25rem;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #31644a7e;
+  border-radius: 7px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  outline: none;
+}
+
+.input input:focus {
+  border: 2px solid #31644a;
+}
+
+.input input:invalid {
+  border: 2px solid red;
+}
+
+.validateErrorInput {
+  text-align: center;
+  color: red;
+}
+
+.btn {
+  margin: 5px 0 10px 0;
+}
