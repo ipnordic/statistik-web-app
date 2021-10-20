@@ -14,14 +14,15 @@
   margin: 5px 10px 5px 0;
   padding: 10px;
   box-sizing: border-box;
-  border: 3px solid #31644a7e;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
+  border: 2px solid #31644a7e;
+  border-radius: 7px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
   outline: none;
 }
 
 .formInline input:focus {
-  border: 3px solid #31644a;
+  border: 2px solid #31644a;
 }
 
 /* .formInline button {
