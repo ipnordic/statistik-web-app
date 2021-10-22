@@ -1,15 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/AgentForm.module.css";
 import CustomContext from "../../Context/CustomContext";
 
@@ -30,7 +22,7 @@ const AgentDetails = () => {
   const history = useHistory();
 
   useEffect(() => {
-    setLoading(true);
+    setLoading("Henter data...");
     const fetchAgentData = async () => {
       const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
       const options = {
@@ -67,52 +59,59 @@ const AgentDetails = () => {
     <div className={styles.table}>
       {isLoggedIn ? (
         <>
-          {loading && <CircularProgress />}
+          {loading && (
+            <div>
+              <Dimmer active>
+                <Loader size="large" active inline="centered">
+                  {loading}
+                </Loader>
+              </Dimmer>
+            </div>
+          )}
           {apiData && (
             <Button
-              variant="contained"
+              primary
+              animated="fade"
+              size="medium"
               onClick={() => {
                 setApiData(null);
                 history.goBack();
               }}
-              sx={{ mb: 1 }}
             >
-              Tilbage
+              <Button.Content visible>Tilbage</Button.Content>
+              <Button.Content hidden>
+                <Icon name="arrow left" />
+              </Button.Content>
             </Button>
           )}
           {apiData && (
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 650 }} aria-label="queue data table">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Navn</TableCell>
-                    <TableCell>Lokalnummer</TableCell>
-                    <TableCell>Kald Besvaret</TableCell>
-                    <TableCell>Gns. Samtaletid</TableCell>
-                    <TableCell>Kald Omstillet</TableCell>
-                    <TableCell>DND Tid (dagligt)</TableCell>
-                    <TableCell>Pause Tid (dagligt)</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {apiData &&
-                    apiData.map((item) => (
-                      <TableRow
-                        className={styles.tableHover}
-                        key={Math.random()}
-                      >
-                        <TableCell>{item.Name}</TableCell>
-                        <TableCell>{item.Agent}</TableCell>
-                        <TableCell>{item.Calls}</TableCell>
-                        <TableCell>{item.AverageCalltime}</TableCell>
-                        <TableCell>{item.Transfers}</TableCell>
-                        <TableCell>{item.DND}</TableCell>
-                        <TableCell>{item.Pause}</TableCell>
-                      </TableRow>
-                    ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <Table selectable>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Navn</Table.HeaderCell>
+                  <Table.HeaderCell>Lokalnummer</Table.HeaderCell>
+                  <Table.HeaderCell>Kald besvaret</Table.HeaderCell>
+                  <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
+                  <Table.HeaderCell>Omstillet</Table.HeaderCell>
+                  <Table.HeaderCell>DND Tid</Table.HeaderCell>
+                  <Table.HeaderCell>Pause Tid</Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {apiData &&
+                  apiData.map((item) => (
+                    <Table.Row key={Math.random()}>
+                      <Table.Cell>{item.Name}</Table.Cell>
+                      <Table.Cell>{item.Agent}</Table.Cell>
+                      <Table.Cell>{item.Calls}</Table.Cell>
+                      <Table.Cell>{item.AverageCalltime}</Table.Cell>
+                      <Table.Cell>{item.Transfers}</Table.Cell>
+                      <Table.Cell>{item.DND}</Table.Cell>
+                      <Table.Cell>{item.Pause}</Table.Cell>
+                    </Table.Row>
+                  ))}
+              </Table.Body>
+            </Table>
           )}
         </>
       ) : (
