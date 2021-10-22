@@ -1,12 +1,5 @@
 .table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: auto;
   padding-bottom: 5rem;
   margin: 5px;
-}
-
-.tableHover:hover {
-  background-color: #00641610;
 }

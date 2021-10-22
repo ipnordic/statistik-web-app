@@ -14,15 +14,14 @@
   border: 2px solid #31644a;
 }
 
-.input input:invalid {
-  border: 2px solid red;
-}
-
 .validateErrorInput {
   text-align: center;
   color: red;
 }
 
 .btn {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
   margin: 5px 0 10px 0;
 }
