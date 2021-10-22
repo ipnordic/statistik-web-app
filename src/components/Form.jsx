@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "./Styles/Form.module.css";
-import { Button, Message, Loader, Dimmer } from "semantic-ui-react";
+import { Button, Message, Loader, Dimmer, Icon } from "semantic-ui-react";
 
 const schema = yup.object({
   company: yup.string(),
@@ -34,7 +34,6 @@ const Form = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -50,6 +49,7 @@ const Form = () => {
       <form className={styles.formInline} onSubmit={handleSubmit(onSubmit)}>
         {userEmail.includes("@ipnordic.dk") ? (
           <input
+            className={styles.input}
             type="text"
             name="company"
             id="company"
@@ -61,8 +61,9 @@ const Form = () => {
         ) : (
           ""
         )}
-
         <input
+          className={styles.input}
+          label="Kønummer"
           type="text"
           name="queueNumber"
           id="queueNumber"
@@ -72,25 +73,27 @@ const Form = () => {
           onChange={(e) => setQueueNumber(e.target.value)}
         />
         {errors.queueNumber?.message}
-
         <input
+          className={styles.input}
+          label={`Start dato`}
           type="text"
           name="startDate"
           id="startDate"
           autoComplete="off"
           placeholder={
-            errors.startDate ? errors.startDate?.message : "Start dato"
+            errors.startDate ? errors.startDate?.message : "YYYY-MM-DD"
           }
           {...register("startDate", { value: startDate })}
           onChange={(e) => setStartDate(e.target.value)}
         />
-
         <input
+          className={styles.input}
+          label="Slut dato"
           type="text"
           name="endDate"
           id="endDate"
           autoComplete="off"
-          placeholder={errors.endDate ? errors.endDate?.message : "Slut dato"}
+          placeholder={errors.endDate ? errors.endDate?.message : "YYYY-MM-DD"}
           {...register("endDate", { value: endDate })}
           onChange={(e) => setEndDate(e.target.value)}
         />
@@ -108,13 +111,16 @@ const Form = () => {
             Søg
           </Button>
         ) : (
-          <Button size="large" primary>
-            Søg
+          <Button animated size="large" primary>
+            <Button.Content visible>Søg</Button.Content>
+            <Button.Content hidden>
+              <Icon name="search" />
+            </Button.Content>
           </Button>
         )}
       </form>
       {error && (
-        <div>
+        <div className={styles.msg}>
           <Message negative>
             <Message.Header>Fejl!</Message.Header>
             <span>{error}</span>
@@ -131,7 +137,7 @@ const Form = () => {
         </div>
       )}
       {endDate && endDate.includes(startDate) ? (
-        <div>
+        <div className={styles.msg}>
           <Message warning>
             <Message.Header>Vigtigt!</Message.Header>
             <strong>Slut datoen</strong> skal være minimum én dag foran{" "}
