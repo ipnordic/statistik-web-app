@@ -11,7 +11,7 @@ const Logout = () => {
 
   return (
     <div>
-      <Button animated="vertical" onClick={onSubmit}>
+      <Button size="small" animated="vertical" onClick={onSubmit}>
         <Button.Content visible>Log ud</Button.Content>
         <Button.Content hidden>
           <Icon name="log out" />
