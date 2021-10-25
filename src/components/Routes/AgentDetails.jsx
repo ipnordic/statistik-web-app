@@ -91,10 +91,13 @@ const AgentDetails = () => {
                   <Table.HeaderCell>Navn</Table.HeaderCell>
                   <Table.HeaderCell>Lokalnummer</Table.HeaderCell>
                   <Table.HeaderCell>Kald besvaret</Table.HeaderCell>
+                  <Table.HeaderCell>Trukket</Table.HeaderCell>
                   <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
                   <Table.HeaderCell>Omstillet</Table.HeaderCell>
                   <Table.HeaderCell>DND Tid</Table.HeaderCell>
                   <Table.HeaderCell>Pause Tid</Table.HeaderCell>
+                  <Table.HeaderCell>Kald o. SL</Table.HeaderCell>
+                  <Table.HeaderCell>Kald o. SL i %</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -104,10 +107,20 @@ const AgentDetails = () => {
                       <Table.Cell>{item.Name}</Table.Cell>
                       <Table.Cell>{item.Agent}</Table.Cell>
                       <Table.Cell>{item.Calls}</Table.Cell>
+                      <Table.Cell>{item.Extracted}</Table.Cell>
                       <Table.Cell>{item.AverageCalltime}</Table.Cell>
                       <Table.Cell>{item.Transfers}</Table.Cell>
                       <Table.Cell>{item.DND}</Table.Cell>
                       <Table.Cell>{item.Pause}</Table.Cell>
+                      <Table.Cell>
+                        {item.CallsOverCustomServiceLevel}
+                      </Table.Cell>
+                      <Table.Cell>
+                        {item.CallsOverCustomServiceLevelInPercent}{" "}
+                        {item.CallsOverCustomServiceLevelInPercent === null
+                          ? ""
+                          : "%"}
+                      </Table.Cell>
                     </Table.Row>
                   ))}
               </Table.Body>
