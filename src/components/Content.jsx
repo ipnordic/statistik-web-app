@@ -8,11 +8,11 @@ const Agent = () => {
   const { isLoggedIn } = useContext(CustomContext);
 
   return (
-    <>
+    <div>
       {isLoggedIn ? <Form /> : <Login />}
 
       {isLoggedIn ? <Period /> : ""}
-    </>
+    </div>
   );
 };
 

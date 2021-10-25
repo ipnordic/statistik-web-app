@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "../Styles/Login.module.css";
-import { Button, Message } from "semantic-ui-react";
-import { clear } from "dom-helpers";
+import { Button, Message, Icon } from "semantic-ui-react";
+import ForgetPassword from "../ForgetPassword";
 
 const validationSchema = yup.object({
   username: yup.string().required("Dette felt er påkrævet!"),
@@ -37,8 +37,7 @@ const Login = () => {
       return response.data;
     } catch (error) {
       setIsLoggedIn(false);
-      setUserEmail("");
-      setUserPassword("");
+
       setError("Noget gik galt, prøv igen.");
       console.log(error);
     }
@@ -56,12 +55,10 @@ const Login = () => {
     setUserEmail(data.username);
     setUserPassword(data.password);
     loginUser(data.username, data.password);
-
-    clear();
   };
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input}>
           <input
@@ -88,9 +85,16 @@ const Login = () => {
           {errors.password?.message}
         </div>
         <div className={styles.btn}>
-          <Button>Log ind</Button>
+          <Button animated primary>
+            <Button.Content visible>Log ind</Button.Content>
+            <Button.Content hidden>
+              <Icon name="arrow circle right" />
+            </Button.Content>
+          </Button>
+          <ForgetPassword />
         </div>
       </form>
+
       {error && (
         <div>
           <Message negative>
@@ -99,7 +103,7 @@ const Login = () => {
           </Message>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

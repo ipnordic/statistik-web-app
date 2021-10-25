@@ -1,17 +1,4 @@
 .table {
   width: auto;
-  padding: 8px;
-  padding-bottom: 6rem;
-  margin-bottom: 40px;
-}
-
-.tableHover:hover {
-  background-color: #00641610;
-}
-
-h3 {
-  font-size: medium;
-  opacity: 80%;
-  margin-bottom: 12px;
-  padding-left: 0.5rem;
+  padding-bottom: 1rem;
 }

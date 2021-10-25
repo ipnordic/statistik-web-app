@@ -1,15 +1,8 @@
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
+import { Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CustomContext from "../../Context/CustomContext";
-import { Button } from "@mui/material";
 import Chart from "../Chart";
 import {
   totalCalls,
@@ -29,93 +22,90 @@ const Period = () => {
   return (
     <div className={styles.table}>
       {apiData && (
-        <>
+        <div>
           {queueNumber === "" ? <Chart /> : ""}
           {apiData.length > 0 ? (
-            <Paper elevation={8}>
-              <TableContainer sx={{ width: "100%" }}>
-                <Table aria-label="queue data table">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Kønavn</TableCell>
-                      <TableCell>Kønummer</TableCell>
-                      <TableCell>Antal kald</TableCell>
-                      <TableCell>Besvaret</TableCell>
-                      <TableCell>Omstillet</TableCell>
-                      <TableCell>Frafald</TableCell>
-                      <TableCell>Gns. Samtaletid</TableCell>
-                      <TableCell>Gns. Ventetid</TableCell>
-                      <TableCell>Længste ventetid</TableCell>
-                      <TableCell>Information</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {apiData &&
-                      apiData
-                        .sort((a, b) => {
-                          return b.Calls - a.Calls;
-                        })
-                        .map((item) => (
-                          <TableRow
-                            className={styles.tableHover}
-                            key={Math.random()}
+            <Table selectable striped>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell>Kønavn</Table.HeaderCell>
+                  <Table.HeaderCell>Kønummer</Table.HeaderCell>
+                  <Table.HeaderCell>Antal kald</Table.HeaderCell>
+                  <Table.HeaderCell>Besvaret</Table.HeaderCell>
+                  <Table.HeaderCell>Omstillet</Table.HeaderCell>
+                  <Table.HeaderCell>Frafald</Table.HeaderCell>
+                  <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
+                  <Table.HeaderCell>Gns. Ventetid</Table.HeaderCell>
+                  <Table.HeaderCell colSpan="2">
+                    Længste ventetid
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {apiData &&
+                  apiData
+                    .sort((a, b) => {
+                      return b.Calls - a.Calls;
+                    })
+                    .map((item) => (
+                      <Table.Row key={Math.random()}>
+                        <Table.Cell>{item.QueueName}</Table.Cell>
+                        <Table.Cell>{item.QueueExtension}</Table.Cell>
+                        <Table.Cell>{item.Calls}</Table.Cell>
+                        <Table.Cell>{item.AnsweredCalls}</Table.Cell>
+                        <Table.Cell>{item.Transfers}</Table.Cell>
+                        <Table.Cell>{item.Abandoned}</Table.Cell>
+                        <Table.Cell>{item.AverageCalltime}</Table.Cell>
+                        <Table.Cell>{item.AverageHoldtime}</Table.Cell>
+                        <Table.Cell>{item.MaxHoldtime}</Table.Cell>
+                        <Table.Cell>
+                          <Link
+                            to={`/statistik/detaljer/${item.QueueExtension}`}
                           >
-                            <TableCell>{item.QueueName}</TableCell>
-                            <TableCell>{item.QueueExtension}</TableCell>
-                            <TableCell>{item.Calls}</TableCell>
-                            <TableCell>{item.AnsweredCalls}</TableCell>
-                            <TableCell>{item.Transfers}</TableCell>
-                            <TableCell>{item.Abandoned}</TableCell>
-                            <TableCell>{item.AverageCalltime}</TableCell>
-                            <TableCell>{item.AverageHoldtime}</TableCell>
-                            <TableCell>{item.MaxHoldtime}</TableCell>
-                            <TableCell>
-                              <Link
-                                to={`/statistik/detaljer/${item.QueueExtension}`}
-                              >
-                                <Button
-                                  size="small"
-                                  variant="contained"
-                                  onClick={() => {
-                                    setApiData(null);
-                                  }}
-                                >
-                                  Se mere
-                                </Button>
-                              </Link>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                    {queueNumber === "" ? (
-                      <TableRow>
-                        <TableCell>
-                          <strong>Total</strong>
-                        </TableCell>
-                        <TableCell></TableCell>
-                        <TableCell>
-                          <strong>{tableTotalCalls}</strong>
-                        </TableCell>
-                        <TableCell>
-                          <strong>{tableTotalAnsweredCalls}</strong>
-                        </TableCell>
-                        <TableCell>
-                          <strong>{tableTotalTransfers}</strong>
-                        </TableCell>
-                        <TableCell>
-                          <strong>{tableTotalAbandoned}</strong>
-                        </TableCell>
-                      </TableRow>
-                    ) : (
-                      ""
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Paper>
+                            <Button
+                              primary
+                              animated="fade"
+                              size="small"
+                              onClick={() => {
+                                setApiData(null);
+                              }}
+                            >
+                              <Button.Content visible>Se mere</Button.Content>
+                              <Button.Content hidden>
+                                <Icon name="arrow right" />
+                              </Button.Content>
+                            </Button>
+                          </Link>
+                        </Table.Cell>
+                      </Table.Row>
+                    ))}
+              </Table.Body>
+
+              <Table.Footer fullWidth>
+                <Table.Row>
+                  <Table.HeaderCell>
+                    <strong>Total</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell></Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalCalls}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalAnsweredCalls}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalTransfers}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell colSpan="6">
+                    <strong>{tableTotalAbandoned}</strong>
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Footer>
+            </Table>
           ) : (
             ""
           )}
-        </>
+        </div>
       )}
     </div>
   );

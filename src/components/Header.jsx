@@ -10,6 +10,7 @@ const Header = () => {
         <a href="/">
           <img className={styles.Image} src={logo} alt="logo" />
         </a>
+        <span>ipnordic Statistik</span>
         <Navbar />
       </div>
     </header>

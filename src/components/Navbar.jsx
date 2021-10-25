@@ -1,19 +1,20 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
-import Button from "@mui/material/Button";
 import styles from "./Header.module.css";
 import CustomContext from "../Context/CustomContext";
+import Logout from "./Logout";
+import Help from "./Help";
 
 const Navbar = () => {
   const { isLoggedIn } = useContext(CustomContext);
   return (
     <nav>
       <ul className={styles.Navbar}>
-        {!isLoggedIn ? (
+        <li>
+          <Help />
+        </li>
+        {isLoggedIn ? (
           <li>
-            <Link to="/">
-              <Button variant="contained">Statistik</Button>
-            </Link>
+            <Logout />
           </li>
         ) : (
           ""
