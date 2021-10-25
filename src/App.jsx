@@ -1,6 +1,11 @@
 import Header from "./components/Header";
 import styles from "./App.module.css";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import Content from "./components/Content";
 import AgentDetails from "./components/Routes/AgentDetails";
 import Footer from "./components/Footer";
@@ -14,7 +19,11 @@ function App() {
         <Switch>
           <Route path="/" component={Content} exact />
           <Route path="/statistik/detaljer/:queueId" component={AgentDetails} />
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
         </Switch>
+
         <Footer />
       </div>
     </Router>
