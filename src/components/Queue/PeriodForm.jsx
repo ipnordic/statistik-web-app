@@ -1,4 +1,3 @@
-import _ from "lodash";
 import { Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
