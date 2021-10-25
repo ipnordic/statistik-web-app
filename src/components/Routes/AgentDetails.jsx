@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
-import styles from "../Styles/AgentForm.module.css";
+import styles from "../Styles/AgentDetails.module.css";
 import CustomContext from "../../Context/CustomContext";
 
 const AgentDetails = () => {
@@ -85,7 +85,7 @@ const AgentDetails = () => {
             </Button>
           )}
           {apiData && (
-            <Table selectable>
+            <Table selectable striped>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Navn</Table.HeaderCell>
