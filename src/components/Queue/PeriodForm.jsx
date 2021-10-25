@@ -1,23 +1,24 @@
+import _ from "lodash";
 import { Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import CustomContext from "../../Context/CustomContext";
 import Chart from "../Chart";
-// import {
-//   totalCalls,
-//   totalAnsweredCalls,
-//   totalTransfers,
-//   totalAbandoned,
-// } from "../../helpers/calcTotal";
+import {
+  totalCalls,
+  totalAnsweredCalls,
+  totalTransfers,
+  totalAbandoned,
+} from "../../helpers/calcTotal";
 
 const Period = () => {
   const { apiData, setApiData, queueNumber } = useContext(CustomContext);
 
-  // const tableTotalCalls = totalCalls(apiData);
-  // const tableTotalAnsweredCalls = totalAnsweredCalls(apiData);
-  // const tableTotalTransfers = totalTransfers(apiData);
-  // const tableTotalAbandoned = totalAbandoned(apiData);
+  const tableTotalCalls = totalCalls(apiData);
+  const tableTotalAnsweredCalls = totalAnsweredCalls(apiData);
+  const tableTotalTransfers = totalTransfers(apiData);
+  const tableTotalAbandoned = totalAbandoned(apiData);
 
   return (
     <div className={styles.table}>
@@ -25,7 +26,7 @@ const Period = () => {
         <div>
           {queueNumber === "" ? <Chart /> : ""}
           {apiData.length > 0 ? (
-            <Table columns={20} selectable striped>
+            <Table selectable striped>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>Kønavn</Table.HeaderCell>
@@ -36,8 +37,9 @@ const Period = () => {
                   <Table.HeaderCell>Frafald</Table.HeaderCell>
                   <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
                   <Table.HeaderCell>Gns. Ventetid</Table.HeaderCell>
-                  <Table.HeaderCell>Længste ventetid</Table.HeaderCell>
-                  <Table.HeaderCell></Table.HeaderCell>
+                  <Table.HeaderCell colSpan="2">
+                    Længste ventetid
+                  </Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
@@ -79,6 +81,27 @@ const Period = () => {
                       </Table.Row>
                     ))}
               </Table.Body>
+
+              <Table.Footer fullWidth>
+                <Table.Row>
+                  <Table.HeaderCell>
+                    <strong>Total</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell></Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalCalls}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalAnsweredCalls}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell>
+                    <strong>{tableTotalTransfers}</strong>
+                  </Table.HeaderCell>
+                  <Table.HeaderCell colSpan="6">
+                    <strong>{tableTotalAbandoned}</strong>
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Footer>
             </Table>
           ) : (
             ""
