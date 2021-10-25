@@ -6,6 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "../Styles/Login.module.css";
 import { Button, Message, Icon } from "semantic-ui-react";
+import ForgetPassword from "../ForgetPassword";
 
 const validationSchema = yup.object({
   username: yup.string().required("Dette felt er påkrævet!"),
@@ -36,8 +37,7 @@ const Login = () => {
       return response.data;
     } catch (error) {
       setIsLoggedIn(false);
-      setUserEmail("");
-      setUserPassword("");
+
       setError("Noget gik galt, prøv igen.");
       console.log(error);
     }
@@ -91,8 +91,10 @@ const Login = () => {
               <Icon name="arrow circle right" />
             </Button.Content>
           </Button>
+          <ForgetPassword />
         </div>
       </form>
+
       {error && (
         <div>
           <Message negative>
