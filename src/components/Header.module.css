@@ -5,11 +5,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   position: sticky;
   top: 0;
-  left: 0;
-  right: 0;
   z-index: 100;
 }
 
@@ -19,15 +17,8 @@
 
 .Navbar {
   display: flex;
-  justify-content: space-evenly;
-  padding: 20px;
+  justify-content: space-around;
   list-style-type: none;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-  padding: 8px;
 }
 
 .Image {
@@ -41,4 +32,9 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.Header span {
+  font-size: 20px;
+  color: whitesmoke;
 }
