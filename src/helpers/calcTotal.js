@@ -44,3 +44,27 @@ export const totalAbandoned = (data) => {
 
   return sumAbandonedNumbers;
 };
+
+export const totalTimeOut = (data) => {
+  const timeOutNumbers = data && data.map((item) => item.TimeOut);
+  const sumTimeOutNumbers =
+    timeOutNumbers &&
+    timeOutNumbers.reduce(function (sum, number) {
+      const updatedSum = sum + number;
+      return updatedSum;
+    }, 0);
+
+  return sumTimeOutNumbers;
+};
+
+export const totalExitempty = (data) => {
+  const exitEmptyNumber = data && data.map((item) => item.Exitempty);
+  const sumExitemptyNumbers =
+    exitEmptyNumber &&
+    exitEmptyNumber.reduce(function (sum, number) {
+      const updatedSum = sum + number;
+      return updatedSum;
+    }, 0);
+
+  return sumExitemptyNumbers;
+};
