@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import axios from "axios";
 import CustomContext from "../../Context/CustomContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "../Styles/Login.module.css";
-import { Button, Message, Icon } from "semantic-ui-react";
+import { Button, Message, Icon, Dimmer, Loader } from "semantic-ui-react";
 import ForgetPassword from "../ForgetPassword";
 
 const validationSchema = yup.object({
@@ -14,8 +14,15 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
-  const { setIsLoggedIn, setUserEmail, setUserPassword, setError, error } =
-    useContext(CustomContext);
+  const {
+    setIsLoggedIn,
+    setUserEmail,
+    setUserPassword,
+    setError,
+    error,
+    loading,
+    setLoading,
+  } = useContext(CustomContext);
 
   const loginUser = async (username, password) => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
@@ -27,17 +34,19 @@ const Login = () => {
     };
 
     try {
+      setLoading("Logger dig ind...");
       const response = await axios(
         `${API_URL}/v2/Period?startDate=2100-01-01&endDate=2100-01-01`,
         options
       );
 
-      setIsLoggedIn(true);
       setError(null);
+      setLoading(null);
+      setIsLoggedIn(true);
       return response.data;
     } catch (error) {
       setIsLoggedIn(false);
-
+      setLoading(null);
       setError("Noget gik galt, prøv igen.");
       console.log(error);
     }
@@ -96,6 +105,15 @@ const Login = () => {
           <ForgetPassword />
         </div>
       </form>
+      {loading && (
+        <div>
+          <Dimmer active>
+            <Loader size="large" active inline="centered">
+              {loading}
+            </Loader>
+          </Dimmer>
+        </div>
+      )}
 
       {error && (
         <div className={styles.messageBox}>
