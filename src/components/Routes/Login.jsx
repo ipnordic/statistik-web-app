@@ -9,8 +9,8 @@ import { Button, Message, Icon } from "semantic-ui-react";
 import ForgetPassword from "../ForgetPassword";
 
 const validationSchema = yup.object({
-  username: yup.string().required("Dette felt er påkrævet!"),
-  password: yup.string().required("Dette felt er påkrævet!"),
+  username: yup.string().required("Brugernavn (email) er påkrævet!"),
+  password: yup.string().required("Kodeord er påkrævet!"),
 });
 
 const Login = () => {
@@ -57,8 +57,14 @@ const Login = () => {
     loginUser(data.username, data.password);
   };
 
+  function isErrorsEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  }
+
+  const checkForErrors = isErrorsEmpty(errors);
+
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.input}>
           <input
@@ -69,9 +75,7 @@ const Login = () => {
             {...register("username")}
           />
         </div>
-        <div className={styles.validateErrorInput}>
-          {errors.username?.message}
-        </div>
+
         <div className={styles.input}>
           <input
             type="password"
@@ -81,9 +85,7 @@ const Login = () => {
             {...register("password")}
           />
         </div>
-        <div className={styles.validateErrorInput}>
-          {errors.password?.message}
-        </div>
+
         <div className={styles.btn}>
           <Button animated primary>
             <Button.Content visible>Log ind</Button.Content>
@@ -96,12 +98,23 @@ const Login = () => {
       </form>
 
       {error && (
-        <div>
+        <div className={styles.messageBox}>
           <Message negative>
             <Message.Header>Fejl!</Message.Header>
             {error}
           </Message>
         </div>
+      )}
+      {!checkForErrors ? (
+        <div className={styles.messageBox}>
+          <Message
+            error
+            header="Der skete en fejl med din indtastning"
+            list={[errors.username?.message, errors.password?.message]}
+          />
+        </div>
+      ) : (
+        ""
       )}
     </div>
   );
