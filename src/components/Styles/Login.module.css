@@ -14,14 +14,13 @@
   border: 2px solid #31644a;
 }
 
-.validateErrorInput {
-  text-align: center;
-  color: red;
-}
-
 .btn {
   width: 98%;
   display: flex;
   justify-content: space-between;
   margin: 5px 0 10px 0;
+}
+
+.messageBox {
+  width: 97%;
 }
