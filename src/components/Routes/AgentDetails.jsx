@@ -4,6 +4,7 @@ import axios from "axios";
 import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/AgentDetails.module.css";
 import CustomContext from "../../Context/CustomContext";
+import useFetchAPI from "../../hooks/useFetchAPI";
 
 const AgentDetails = () => {
   const {
@@ -55,6 +56,7 @@ const AgentDetails = () => {
     company,
   ]);
 
+  const { fetchData } = useFetchAPI();
   return (
     <div className={styles.table}>
       {isLoggedIn ? (
@@ -74,8 +76,8 @@ const AgentDetails = () => {
               animated="fade"
               size="medium"
               onClick={() => {
-                setApiData(null);
                 history.goBack();
+                fetchData();
               }}
             >
               <Button.Content visible>Tilbage</Button.Content>

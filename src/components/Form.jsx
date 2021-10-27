@@ -26,7 +26,6 @@ const Form = () => {
     setQueueNumber,
     setStartDate,
     setEndDate,
-    setError,
     error,
   } = useContext(CustomContext);
   const { fetchData } = useFetchAPI();
@@ -41,7 +40,6 @@ const Form = () => {
 
   const onSubmit = (data) => {
     fetchData();
-    setError(null);
   };
 
   return (

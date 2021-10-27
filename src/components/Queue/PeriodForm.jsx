@@ -27,7 +27,7 @@ const Period = () => {
     <div className={styles.table}>
       {apiData && (
         <div>
-          {queueNumber === "" ? <Chart /> : ""}
+          {queueNumber.length >= 4 ? "" : <Chart />}
           {apiData.length > 0 ? (
             <Table structured selectable striped>
               <Table.Header>
@@ -95,22 +95,22 @@ const Period = () => {
                   </Table.HeaderCell>
                   <Table.HeaderCell></Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalCalls}</strong>
+                    <strong>{tableTotalCalls.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalAnsweredCalls}</strong>
+                    <strong>{tableTotalAnsweredCalls.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalTransfers}</strong>
+                    <strong>{tableTotalTransfers.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalAbandoned}</strong>
+                    <strong>{tableTotalAbandoned.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalTimeOut}</strong>
+                    <strong>{tableTotalTimeOut.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalExitempty}</strong>
+                    <strong>{tableTotalExitempty.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell colSpan="4" />
                 </Table.Row>
