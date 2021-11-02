@@ -6,7 +6,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import styles from "../Styles/Login.module.css";
 import { Button, Message, Icon, Dimmer, Loader } from "semantic-ui-react";
-import ForgetPassword from "../ForgetPassword";
+import ForgotPassword from "../ForgotPassword";
 import { encryptData, decryptData } from ".././utils/utils";
 
 const validationSchema = yup.object({
@@ -131,7 +131,7 @@ const Login = () => {
               <Icon name="arrow circle right" />
             </Button.Content>
           </Button>
-          <ForgetPassword />
+          <ForgotPassword />
         </div>
       </form>
       {loading && (
