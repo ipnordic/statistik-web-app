@@ -1,7 +1,7 @@
 import { Table, Button, Icon } from "semantic-ui-react";
 import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import CustomContext from "../../Context/CustomContext";
 import Chart from "../Chart";
 import {
@@ -16,12 +16,27 @@ import {
 const Period = () => {
   const { apiData, setApiData, queueNumber } = useContext(CustomContext);
 
-  const tableTotalCalls = totalCalls(apiData);
-  const tableTotalAnsweredCalls = totalAnsweredCalls(apiData);
-  const tableTotalTransfers = totalTransfers(apiData);
-  const tableTotalAbandoned = totalAbandoned(apiData);
-  const tableTotalTimeOut = totalTimeOut(apiData);
-  const tableTotalExitempty = totalExitempty(apiData);
+  const tableTotalCallsMemorize = useMemo(() => totalCalls(apiData), [apiData]);
+  const tableTotalAnsweredCallsMemorize = useMemo(
+    () => totalAnsweredCalls(apiData),
+    [apiData]
+  );
+  const tableTotalTransfersMemorize = useMemo(
+    () => totalTransfers(apiData),
+    [apiData]
+  );
+  const tableTotalAbandonedMemorize = useMemo(
+    () => totalAbandoned(apiData),
+    [apiData]
+  );
+  const tableTotalTimeOutMemorize = useMemo(
+    () => totalTimeOut(apiData),
+    [apiData]
+  );
+  const tableTotalExitemptyMemorize = useMemo(
+    () => totalExitempty(apiData),
+    [apiData]
+  );
 
   return (
     <div className={styles.table}>
@@ -95,22 +110,24 @@ const Period = () => {
                   </Table.HeaderCell>
                   <Table.HeaderCell></Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalCalls.toString()}</strong>
+                    <strong>{tableTotalCallsMemorize.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalAnsweredCalls.toString()}</strong>
+                    <strong>
+                      {tableTotalAnsweredCallsMemorize.toString()}
+                    </strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalTransfers.toString()}</strong>
+                    <strong>{tableTotalTransfersMemorize.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalAbandoned.toString()}</strong>
+                    <strong>{tableTotalAbandonedMemorize.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalTimeOut.toString()}</strong>
+                    <strong>{tableTotalTimeOutMemorize.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell>
-                    <strong>{tableTotalExitempty.toString()}</strong>
+                    <strong>{tableTotalExitemptyMemorize.toString()}</strong>
                   </Table.HeaderCell>
                   <Table.HeaderCell colSpan="4" />
                 </Table.Row>
