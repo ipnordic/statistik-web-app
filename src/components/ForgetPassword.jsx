@@ -13,8 +13,7 @@ const ForgetPassword = () => {
   return (
     <Button
       type="button"
-      animated
-      negative
+      animated="fade"
       onClick={() => {
         openInNewTab(
           `https://identity.ipnordic.dk/Identity/Account/forgotpassword/?account=${userEmail}&culture=da`
