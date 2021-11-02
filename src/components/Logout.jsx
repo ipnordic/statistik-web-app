@@ -7,11 +7,12 @@ const Logout = () => {
 
   const onSubmit = () => {
     setIsLoggedIn(false);
+    localStorage.removeItem("ipnordic_saveCredentials");
   };
 
   return (
     <div>
-      <Button size="small" animated="vertical" onClick={onSubmit}>
+      <Button size="small" animated="fade" onClick={onSubmit}>
         <Button.Content visible>Log ud</Button.Content>
         <Button.Content hidden>
           <Icon name="log out" />
