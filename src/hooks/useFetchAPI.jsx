@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useContext } from "react";
-import CustomContext from "../Context/CustomContext";
+import Context from "../store/Context";
 
 const useFetchAPI = () => {
   const {
@@ -13,7 +13,7 @@ const useFetchAPI = () => {
     userEmail,
     userPassword,
     company,
-  } = useContext(CustomContext);
+  } = useContext(Context);
 
   const fetchData = async () => {
     const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;

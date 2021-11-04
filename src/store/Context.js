@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const CustomContext = React.createContext({
+const Context = React.createContext({
   isLoggedIn: false,
   userEmail: "",
   userPassword: "",
@@ -14,7 +14,7 @@ const CustomContext = React.createContext({
   company: "",
 });
 
-export const CustomContextProvider = (props) => {
+export const Provider = ({ children }) => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -27,36 +27,32 @@ export const CustomContextProvider = (props) => {
   const [queueNumber, setQueueNumber] = useState("");
   const [company, setCompany] = useState("");
 
-  return (
-    <CustomContext.Provider
-      value={{
-        userEmail,
-        userPassword,
-        setUserEmail,
-        setUserPassword,
-        isLoggedIn,
-        setIsLoggedIn,
-        apiData,
-        loading,
-        error,
-        apiStatistics,
-        startDate,
-        endDate,
-        queueNumber,
-        setApiData,
-        setLoading,
-        setError,
-        setApiStatistics,
-        setStartDate,
-        setEndDate,
-        setQueueNumber,
-        company,
-        setCompany,
-      }}
-    >
-      {props.children}
-    </CustomContext.Provider>
-  );
+  const value = {
+    userEmail,
+    userPassword,
+    setUserEmail,
+    setUserPassword,
+    isLoggedIn,
+    setIsLoggedIn,
+    apiData,
+    loading,
+    error,
+    apiStatistics,
+    startDate,
+    endDate,
+    queueNumber,
+    setApiData,
+    setLoading,
+    setError,
+    setApiStatistics,
+    setStartDate,
+    setEndDate,
+    setQueueNumber,
+    company,
+    setCompany,
+  };
+
+  return <Context.Provider value={value}>{children}</Context.Provider>;
 };
 
-export default CustomContext;
+export default Context;

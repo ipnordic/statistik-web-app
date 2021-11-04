@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Button, Icon } from "semantic-ui-react";
-import CustomContext from "../Context/CustomContext";
+import Context from "../../store/Context";
 
 const Logout = () => {
-  const { setIsLoggedIn } = useContext(CustomContext);
+  const { setIsLoggedIn } = useContext(Context);
 
   const onSubmit = () => {
     setIsLoggedIn(false);

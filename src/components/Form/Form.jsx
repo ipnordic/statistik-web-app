@@ -1,11 +1,11 @@
 import { useContext } from "react";
-import CustomContext from "../Context/CustomContext";
-import useFetchAPI from "../hooks/useFetchAPI";
+import Context from "../../store/Context";
+import useFetchAPI from "../../hooks/useFetchAPI";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import styles from "./Styles/Form.module.css";
 import { Button, Message, Loader, Dimmer, Icon } from "semantic-ui-react";
+import "./Form.css";
 
 const schema = yup.object({
   company: yup.string(),
@@ -27,7 +27,7 @@ const Form = () => {
     setStartDate,
     setEndDate,
     error,
-  } = useContext(CustomContext);
+  } = useContext(Context);
   const { fetchData } = useFetchAPI();
 
   const {
@@ -43,11 +43,10 @@ const Form = () => {
   };
 
   return (
-    <div className={styles.formContainer}>
-      <form className={styles.formInline} onSubmit={handleSubmit(onSubmit)}>
+    <div>
+      <form className="formInline" onSubmit={handleSubmit(onSubmit)}>
         {userEmail.includes("@ipnordic.dk") ? (
           <input
-            className={styles.input}
             type="text"
             name="company"
             id="company"
@@ -60,7 +59,6 @@ const Form = () => {
           ""
         )}
         <input
-          className={styles.input}
           label="Kønummer"
           type="text"
           name="queueNumber"
@@ -72,7 +70,6 @@ const Form = () => {
         />
         {errors.queueNumber?.message}
         <input
-          className={styles.input}
           label={`Start dato`}
           type="text"
           name="startDate"
@@ -85,7 +82,6 @@ const Form = () => {
           onChange={(e) => setStartDate(e.target.value)}
         />
         <input
-          className={styles.input}
           label="Slut dato"
           type="text"
           name="endDate"
@@ -118,7 +114,7 @@ const Form = () => {
         )}
       </form>
       {error && (
-        <div className={styles.msg}>
+        <div>
           <Message negative>
             <Message.Header>Fejl!</Message.Header>
             <span>{error}</span>
@@ -135,7 +131,7 @@ const Form = () => {
         </div>
       )}
       {endDate && endDate.includes(startDate) ? (
-        <div className={styles.msg}>
+        <div>
           <Message warning>
             <Message.Header>Vigtigt!</Message.Header>
             <strong>Slut datoen</strong> skal være minimum én dag foran{" "}

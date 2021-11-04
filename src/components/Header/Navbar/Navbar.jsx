@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
-import styles from "./Header.module.css";
-import CustomContext from "../Context/CustomContext";
-import Logout from "./Logout";
-import Help from "./Help";
+import Context from "../../../store/Context";
+import Logout from "../../Logout/Logout";
+import Help from "../../Help/Help";
+import "./Navbar.css";
 
 const Navbar = () => {
-  const { isLoggedIn } = useContext(CustomContext);
+  const { isLoggedIn } = useContext(Context);
   return (
     <nav>
-      <ul className={styles.Navbar}>
+      <ul className="NavbarContainer">
         <li>
           <Help />
         </li>

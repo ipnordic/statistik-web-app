@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
-import styles from "../Styles/AgentDetails.module.css";
-import CustomContext from "../../Context/CustomContext";
+import "./AgentDetails.css";
+import Context from "../../store/Context";
 import useFetchAPI from "../../hooks/useFetchAPI";
 
 const AgentDetails = () => {
@@ -18,7 +18,7 @@ const AgentDetails = () => {
     userPassword,
     loading,
     company,
-  } = useContext(CustomContext);
+  } = useContext(Context);
   let { queueId } = useParams();
   const history = useHistory();
 
@@ -58,7 +58,7 @@ const AgentDetails = () => {
 
   const { fetchData } = useFetchAPI();
   return (
-    <div className={styles.table}>
+    <div className="AgentDetailsContainer">
       {isLoggedIn ? (
         <>
           {loading && (

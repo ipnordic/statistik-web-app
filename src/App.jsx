@@ -1,5 +1,4 @@
-import Header from "./components/Header";
-import styles from "./App.module.css";
+import Header from "./components/Header/Header";
 import {
   BrowserRouter as Router,
   Route,
@@ -7,15 +6,16 @@ import {
   Redirect,
 } from "react-router-dom";
 import Content from "./components/Content";
-import AgentDetails from "./components/Routes/AgentDetails";
-import Footer from "./components/Footer";
+import AgentDetails from "./components/AgentDetails/AgentDetails";
+import Footer from "./components/Footer/Footer";
 import "semantic-ui-css/semantic.min.css";
+import "./App.css";
 
 function App() {
   return (
     <Router>
       <Header />
-      <div className={styles.Container}>
+      <div className="AppContainer">
         <Switch>
           <Route path="/" component={Content} exact />
           <Route path="/statistik/detaljer/:queueId" component={AgentDetails} />

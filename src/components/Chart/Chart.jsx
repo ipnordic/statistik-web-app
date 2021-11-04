@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis, Tooltip } from "recharts";
-import CustomContext from "../Context/CustomContext";
-import styles from "./Styles/Chart.module.css";
-
+import Context from "../../store/Context";
+import "./Chart.css";
 const Chart = () => {
-  const { apiData } = useContext(CustomContext);
+  const { apiData } = useContext(Context);
 
   return (
-    <div className={styles.Chart}>
+    <div className="ChartContainer">
       {apiData && (
         <BarChart width={1200} height={280} data={apiData}>
           <Bar dataKey="Calls" fill="#31644a" />

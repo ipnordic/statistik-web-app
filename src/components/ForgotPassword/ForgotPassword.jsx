@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import { Icon, Button } from "semantic-ui-react";
-import CustomContex from "../Context/CustomContext";
+import Contex from "../../store/Context";
 
 const ForgetPassword = () => {
-  const { userEmail } = useContext(CustomContex);
+  const { userEmail } = useContext(Contex);
 
   const openInNewTab = (url) => {
     const newWindow = window.open(url, "_blank", "noopener,noreferrer");

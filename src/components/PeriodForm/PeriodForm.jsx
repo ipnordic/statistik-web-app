@@ -1,9 +1,8 @@
 import { Table, Button, Icon } from "semantic-ui-react";
-import styles from "../Styles/PeriodForm.module.css";
 import { Link } from "react-router-dom";
 import { useContext, useMemo } from "react";
-import CustomContext from "../../Context/CustomContext";
-import Chart from "../Chart";
+import Context from "../../store/Context";
+import Chart from "../Chart/Chart";
 import {
   totalCalls,
   totalAnsweredCalls,
@@ -11,10 +10,11 @@ import {
   totalAbandoned,
   totalTimeOut,
   totalExitempty,
-} from "../../helpers/calcTotal";
+} from "../../utils/calcTotal";
+import "./PeriodForm.css";
 
 const Period = () => {
-  const { apiData, setApiData, queueNumber } = useContext(CustomContext);
+  const { apiData, setApiData, queueNumber } = useContext(Context);
 
   const tableTotalCallsMemorize = useMemo(() => totalCalls(apiData), [apiData]);
   const tableTotalAnsweredCallsMemorize = useMemo(
@@ -39,7 +39,7 @@ const Period = () => {
   );
 
   return (
-    <div className={styles.table}>
+    <div className="PeriodFormContainer">
       {apiData && (
         <div>
           {queueNumber.length >= 4 ? "" : <Chart />}

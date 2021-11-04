@@ -2,11 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { CustomContextProvider } from "./Context/CustomContext";
+import { Provider } from "./store/Context";
 
 ReactDOM.render(
-  <CustomContextProvider>
+  <Provider>
     <App />
-  </CustomContextProvider>,
+  </Provider>,
   document.getElementById("root")
 );

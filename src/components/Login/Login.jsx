@@ -1,13 +1,13 @@
 import { useCallback, useContext, useEffect } from "react";
 import axios from "axios";
-import CustomContext from "../../Context/CustomContext";
+import Context from "../../store/Context";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import styles from "../Styles/Login.module.css";
 import { Button, Message, Icon, Dimmer, Loader } from "semantic-ui-react";
-import ForgotPassword from "../ForgotPassword";
-import { encryptData, decryptData } from ".././utils/utils";
+import ForgotPassword from "../ForgotPassword/ForgotPassword";
+import { encryptData, decryptData } from "../../utils/utils";
+import "./Login.css";
 
 const validationSchema = yup.object({
   username: yup.string().required("Brugernavn (email) er påkrævet!"),
@@ -24,7 +24,7 @@ const Login = () => {
     error,
     loading,
     setLoading,
-  } = useContext(CustomContext);
+  } = useContext(Context);
 
   const loginUser = useCallback(
     (username, password) => {
@@ -102,9 +102,9 @@ const Login = () => {
   const checkForErrors = isErrorsEmpty(errors);
 
   return (
-    <div className={styles.container}>
+    <div className="LoginContainer">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className={styles.input}>
+        <div className="LoginContainer">
           <input
             type="text"
             name="username"
@@ -114,7 +114,7 @@ const Login = () => {
           />
         </div>
 
-        <div className={styles.input}>
+        <div className="LoginContainer">
           <input
             type="password"
             name="password"
@@ -124,7 +124,7 @@ const Login = () => {
           />
         </div>
 
-        <div className={styles.btn}>
+        <div className="LoginContainer btn">
           <Button animated="fade" primary>
             <Button.Content visible>Log ind</Button.Content>
             <Button.Content hidden>
@@ -145,7 +145,7 @@ const Login = () => {
       )}
 
       {error && (
-        <div className={styles.messageBox}>
+        <div className="LoginContainer messageBox">
           <Message negative>
             <Message.Header>Fejl!</Message.Header>
             {error}
@@ -153,7 +153,7 @@ const Login = () => {
         </div>
       )}
       {!checkForErrors ? (
-        <div className={styles.messageBox}>
+        <div className="LoginContainer messageBox">
           <Message
             error
             header="Der skete en fejl med din indtastning"

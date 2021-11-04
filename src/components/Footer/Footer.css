@@ -1,4 +1,4 @@
-.Footer {
+.FooterContainer {
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -12,7 +12,7 @@
   border-top: 1px solid lightgray;
 }
 
-.Left {
+.LeftContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,11 +24,11 @@ img {
   margin-right: 10px;
 }
 
-.Text {
+.TextContainer {
   opacity: 0.8;
 }
 
-.Right {
+.RightContainer {
   display: flex;
   flex-direction: row;
   align-items: center;
