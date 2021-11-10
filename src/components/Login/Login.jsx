@@ -4,7 +4,7 @@ import Context from "../../store/Context";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Button, Message, Icon, Dimmer, Loader } from "semantic-ui-react";
+import { Button, Message, Icon, Dimmer, Loader, Form } from "semantic-ui-react";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import { encryptData, decryptData } from "../../utils/utils";
 import "./Login.css";
@@ -103,8 +103,9 @@ const Login = () => {
 
   return (
     <div className="LoginContainer">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="LoginContainer">
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Form.Field>
+          <label htmlFor="username">Email</label>
           <input
             type="text"
             name="username"
@@ -112,9 +113,10 @@ const Login = () => {
             placeholder="Email"
             {...register("username")}
           />
-        </div>
+        </Form.Field>
 
-        <div className="LoginContainer">
+        <Form.Field>
+          <label htmlFor="password">Kodeord</label>
           <input
             type="password"
             name="password"
@@ -122,7 +124,7 @@ const Login = () => {
             placeholder="Kodeord"
             {...register("password")}
           />
-        </div>
+        </Form.Field>
 
         <div className="LoginContainer btn">
           <Button animated="fade" primary>
@@ -133,7 +135,7 @@ const Login = () => {
           </Button>
           <ForgotPassword />
         </div>
-      </form>
+      </Form>
       {loading && (
         <div>
           <Dimmer active>
