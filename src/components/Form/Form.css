@@ -6,21 +6,9 @@
   margin: 5px;
 }
 
-.formInline input {
-  margin: 0.5rem;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 2px solid #31644a7e;
-  border-radius: 10px;
-  -webkit-transition: 0.3s;
-  transition: 0.5s;
-  outline: none;
-}
-
-.formInline input:focus {
-  border: 2px solid #31644a;
-}
-
-.formInline input.InValid {
-  border: 2px solid red;
+.formInline .buttongroup {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.9rem;
+  margin-left: 1rem;
 }
