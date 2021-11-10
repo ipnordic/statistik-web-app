@@ -1,3 +1,11 @@
+.LoginContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .LoginContainer input {
   width: 25rem;
   margin: 5px 10px 5px 0;
@@ -15,12 +23,12 @@
 }
 
 .LoginContainer .btn {
-  width: 98%;
+  width: auto;
   display: flex;
   justify-content: space-between;
   margin: 5px 0 10px 0;
 }
 
 .LoginContainer .messageBox {
-  width: 97%;
+  width: auto;
 }
