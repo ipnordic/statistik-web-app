@@ -2,13 +2,13 @@ import React, { useContext } from "react";
 import Context from "../../../store/Context";
 import Logout from "../../Logout/Logout";
 import Help from "../../Help/Help";
-import "./Navbar.css";
+import NavbarContainer from "./UI/NavbarContainer";
 
 const Navbar = () => {
   const { isLoggedIn } = useContext(Context);
   return (
-    <nav>
-      <ul className="NavbarContainer">
+    <NavbarContainer>
+      <ul>
         <li>
           <Help />
         </li>
@@ -20,7 +20,7 @@ const Navbar = () => {
           ""
         )}
       </ul>
-    </nav>
+    </NavbarContainer>
   );
 };
 
