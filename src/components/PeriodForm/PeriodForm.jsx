@@ -11,7 +11,7 @@ import {
   totalTimeOut,
   totalExitempty,
 } from "../../utils/calcTotal";
-import "./PeriodForm.css";
+import PeriodContainer from "./UI/PeriodContainer";
 
 const Period = () => {
   const { apiData, setApiData, queueNumber } = useContext(Context);
@@ -39,9 +39,9 @@ const Period = () => {
   );
 
   return (
-    <div className="PeriodFormContainer">
+    <>
       {apiData && (
-        <div>
+        <PeriodContainer>
           {queueNumber.length >= 4 ? "" : <Chart />}
           {apiData.length > 0 ? (
             <Table structured selectable striped>
@@ -136,9 +136,9 @@ const Period = () => {
           ) : (
             ""
           )}
-        </div>
+        </PeriodContainer>
       )}
-    </div>
+    </>
   );
 };
 

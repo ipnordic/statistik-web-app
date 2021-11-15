@@ -2,9 +2,9 @@ import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
-import "./AgentDetails.css";
 import Context from "../../store/Context";
 import useFetchAPI from "../../hooks/useFetchAPI";
+import AgentDetailsContainer from "./UI/AgentDetailsContainer";
 
 const AgentDetails = () => {
   const {
@@ -58,7 +58,7 @@ const AgentDetails = () => {
 
   const { fetchData } = useFetchAPI();
   return (
-    <div className="AgentDetailsContainer">
+    <AgentDetailsContainer>
       {isLoggedIn ? (
         <>
           {loading && (
@@ -132,7 +132,7 @@ const AgentDetails = () => {
       ) : (
         history.push("/statistik")
       )}
-    </div>
+    </AgentDetailsContainer>
   );
 };
 

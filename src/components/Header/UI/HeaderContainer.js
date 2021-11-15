@@ -24,9 +24,9 @@ const HeaderContainer = styled.header`
 `;
 
 export const HeaderTwo = styled.div`
-  width: 60vw;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
