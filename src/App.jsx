@@ -13,10 +13,9 @@ import styled from "styled-components";
 
 const AppContainer = styled.main`
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   width: 100%;
-  height: auto;
-  padding: 1rem;
+  height: 100%;
 `;
 
 function App() {
@@ -31,9 +30,8 @@ function App() {
             <Redirect to="/" />
           </Route>
         </Switch>
-
-        <Footer />
       </AppContainer>
+      <Footer />
     </Router>
   );
 }
