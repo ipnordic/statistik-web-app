@@ -1,7 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
-import { Dimmer, Loader, Table, Button, Icon } from "semantic-ui-react";
+import {
+  Dimmer,
+  Loader,
+  Table,
+  Button,
+  Icon,
+  Message,
+} from "semantic-ui-react";
 import Context from "../../store/Context";
 import useFetchAPI from "../../hooks/useFetchAPI";
 import AgentDetailsContainer from "./UI/AgentDetailsContainer";
@@ -70,7 +77,7 @@ const AgentDetails = () => {
               </Dimmer>
             </div>
           )}
-          {apiData && (
+          {apiData && apiData.length !== 0 ? (
             <Button
               primary
               animated="fade"
@@ -85,8 +92,32 @@ const AgentDetails = () => {
                 <Icon name="arrow left" />
               </Button.Content>
             </Button>
+          ) : (
+            ""
           )}
-          {apiData && (
+          {apiData && apiData.length === 0 ? (
+            <>
+              <Message
+                warning
+                header="Ingen data"
+                content="Der er ingen data at vise."
+              />
+              <Button
+                primary
+                animated="fade"
+                size="medium"
+                onClick={() => {
+                  history.goBack();
+                  fetchData();
+                }}
+              >
+                <Button.Content visible>Tilbage</Button.Content>
+                <Button.Content hidden>
+                  <Icon name="arrow left" />
+                </Button.Content>
+              </Button>
+            </>
+          ) : (
             <Table selectable striped>
               <Table.Header>
                 <Table.Row>
@@ -130,7 +161,7 @@ const AgentDetails = () => {
           )}
         </>
       ) : (
-        history.push("/statistik")
+        ""
       )}
     </AgentDetailsContainer>
   );
