@@ -89,7 +89,7 @@ const AgentDetails = () => {
               fluid
               primary
               animated="fade"
-              size="medium"
+              size="big"
               onClick={() => {
                 history.goBack();
                 fetchData();
