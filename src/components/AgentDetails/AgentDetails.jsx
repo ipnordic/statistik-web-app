@@ -31,6 +31,12 @@ const AgentDetails = () => {
 
   useEffect(() => {
     setLoading("Henter data...");
+
+    if (!isLoggedIn) {
+      setLoading(null);
+      return;
+    }
+
     const fetchAgentData = async () => {
       const API_URL = `https://api-prod01.ipnordic.dk/api/Statistics/Queue`;
       const options = {
@@ -61,6 +67,7 @@ const AgentDetails = () => {
     userEmail,
     userPassword,
     company,
+    isLoggedIn,
   ]);
 
   const { fetchData } = useFetchAPI();
@@ -79,6 +86,7 @@ const AgentDetails = () => {
           )}
           {apiData && apiData.length !== 0 ? (
             <Button
+              fluid
               primary
               animated="fade"
               size="medium"
@@ -161,7 +169,7 @@ const AgentDetails = () => {
           )}
         </>
       ) : (
-        ""
+        history.push("/")
       )}
     </AgentDetailsContainer>
   );
