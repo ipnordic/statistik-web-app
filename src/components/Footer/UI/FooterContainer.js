@@ -35,6 +35,10 @@ export const FooterRight = styled.div`
   flex-direction: row;
   align-items: center;
 
+  & .facebook {
+    margin-right: 1rem;
+  }
+
   & .facebook:hover {
     opacity: 0.4;
   }
