@@ -43,7 +43,7 @@ const FormInput = () => {
   };
 
   return (
-    <div>
+    <>
       <Form className="formInline" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group widths="equal">
           {userEmail.includes("@ipnordic.dk") ? (
@@ -168,7 +168,7 @@ const FormInput = () => {
       ) : (
         ""
       )}
-    </div>
+    </>
   );
 };
 

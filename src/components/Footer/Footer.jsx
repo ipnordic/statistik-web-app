@@ -1,27 +1,27 @@
 import React from "react";
 import logo from "../../assets/logo.png";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
-import "./Footer.css";
+import FooterContainer, { FooterLeft, FooterRight } from "./UI/FooterContainer";
 
 const Footer = () => {
   return (
-    <div className="FooterContainer">
-      <div className="LeftContainer">
+    <FooterContainer>
+      <FooterLeft>
         <img src={logo} alt="logo" />
         <span className="TextContainer">&copy; 2021 ipnordic A/S</span>
-      </div>
-      <div className="RightContainer">
-        <a className="SocialFB" href="https://www.facebook.com/Ipnordic">
+      </FooterLeft>
+      <FooterRight>
+        <a className="facebook" href="https://www.facebook.com/Ipnordic">
           <FaFacebook />
         </a>
         <a
-          className="SocialLI"
+          className="linkedin"
           href="https://www.linkedin.com/company/ipnordic-a-s/"
         >
           <FaLinkedin />
         </a>
-      </div>
-    </div>
+      </FooterRight>
+    </FooterContainer>
   );
 };
 

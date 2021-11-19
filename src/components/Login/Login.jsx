@@ -8,6 +8,10 @@ import { Button, Message, Icon, Dimmer, Loader, Form } from "semantic-ui-react";
 import ForgotPassword from "../ForgotPassword/ForgotPassword";
 import { encryptData, decryptData } from "../../utils/utils";
 import "./Login.css";
+import LoginContainer, {
+  LoginBtnGroup,
+  LoginMessage,
+} from "./UI/LoginContainer";
 
 const validationSchema = yup.object({
   username: yup.string().required("Brugernavn (email) er påkrævet!"),
@@ -102,7 +106,7 @@ const Login = () => {
   const checkForErrors = isErrorsEmpty(errors);
 
   return (
-    <div className="LoginContainer">
+    <LoginContainer>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Field>
           <label htmlFor="username">Email</label>
@@ -126,7 +130,7 @@ const Login = () => {
           />
         </Form.Field>
 
-        <div className="LoginContainer btn">
+        <LoginBtnGroup>
           <Button animated="fade" primary>
             <Button.Content visible>Log ind</Button.Content>
             <Button.Content hidden>
@@ -134,7 +138,7 @@ const Login = () => {
             </Button.Content>
           </Button>
           <ForgotPassword />
-        </div>
+        </LoginBtnGroup>
       </Form>
       {loading && (
         <div>
@@ -147,7 +151,7 @@ const Login = () => {
       )}
 
       {error && (
-        <div className="LoginContainer messageBox">
+        <div>
           <Message negative>
             <Message.Header>Fejl!</Message.Header>
             {error}
@@ -155,17 +159,17 @@ const Login = () => {
         </div>
       )}
       {!checkForErrors ? (
-        <div className="LoginContainer messageBox">
+        <LoginMessage>
           <Message
             error
             header="Der skete en fejl med din indtastning"
             list={[errors.username?.message, errors.password?.message]}
           />
-        </div>
+        </LoginMessage>
       ) : (
         ""
       )}
-    </div>
+    </LoginContainer>
   );
 };
 
