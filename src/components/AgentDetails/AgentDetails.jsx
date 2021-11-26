@@ -91,6 +91,7 @@ const AgentDetails = () => {
               animated="fade"
               size="big"
               onClick={() => {
+                setApiData(null);
                 history.goBack();
                 fetchData();
               }}
@@ -104,12 +105,8 @@ const AgentDetails = () => {
             ""
           )}
           {apiData && apiData.length === 0 ? (
-            <>
-              <Message
-                warning
-                header="Ingen data"
-                content="Der er ingen data at vise."
-              />
+            <div className="nodata">
+              <Message warning content="Der er ingen data at vise." />
               <Button
                 primary
                 animated="fade"
@@ -124,7 +121,7 @@ const AgentDetails = () => {
                   <Icon name="arrow left" />
                 </Button.Content>
               </Button>
-            </>
+            </div>
           ) : (
             <Table selectable striped>
               <Table.Header>

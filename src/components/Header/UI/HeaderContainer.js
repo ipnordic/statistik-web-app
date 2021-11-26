@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
+  display: flex;
+  justify-content: center;
   background-color: #31644a;
   width: 100%;
-  height: 65px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 0.5rem;
+  height: 60px;
+  margin-bottom: 0.8rem;
   position: sticky;
   top: 0;
   z-index: 100;
