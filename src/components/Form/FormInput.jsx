@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, Message, Loader, Dimmer, Icon, Form } from "semantic-ui-react";
 import "./Form.css";
+import DatePicker from "react-datepicker";
+import { format } from "date-fns";
+import "react-datepicker/dist/react-datepicker.css";
 
 const schema = yup.object({
   company: yup.string(),
@@ -40,6 +43,11 @@ const FormInput = () => {
 
   const onSubmit = (data) => {
     fetchData();
+  };
+
+  const formatDate = (date) => {
+    const formatdate = format(new Date(date), "yyyy-MM-dd");
+    return formatdate;
   };
 
   return (
@@ -80,33 +88,26 @@ const FormInput = () => {
 
           <Form.Field>
             <label htmlFor="startDate">Start dato</label>
-            <input
-              label={`Start dato`}
-              type="text"
+
+            <DatePicker
               name="startDate"
               id="startDate"
-              autoComplete="off"
-              placeholder={
-                errors.startDate ? errors.startDate?.message : "YYYY-MM-DD"
-              }
+              dateFormat="yyyy-MM-dd"
+              value={startDate}
               {...register("startDate", { value: startDate })}
-              onChange={(e) => setStartDate(e.target.value)}
+              onChange={(date) => setStartDate(formatDate(date))}
             />
           </Form.Field>
 
           <Form.Field>
             <label htmlFor="endDate">Slut dato</label>
-            <input
-              label="Slut dato"
-              type="text"
+            <DatePicker
               name="endDate"
               id="endDate"
-              autoComplete="off"
-              placeholder={
-                errors.endDate ? errors.endDate?.message : "YYYY-MM-DD"
-              }
+              dateFormat="yyyy-MM-dd"
+              value={endDate}
               {...register("endDate", { value: endDate })}
-              onChange={(e) => setEndDate(e.target.value)}
+              onChange={(date) => setEndDate(formatDate(date))}
             />
           </Form.Field>
         </Form.Group>
