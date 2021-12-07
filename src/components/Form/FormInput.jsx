@@ -6,9 +6,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Button, Message, Loader, Dimmer, Icon, Form } from "semantic-ui-react";
 import "./Form.css";
-import DatePicker from "react-datepicker";
+import DatePicker, { registerLocale } from "react-datepicker";
 import { format } from "date-fns";
+import dk from "date-fns/locale/da";
 import "react-datepicker/dist/react-datepicker.css";
+
+registerLocale("da", dk);
 
 const schema = yup.object({
   company: yup.string(),
@@ -90,6 +93,7 @@ const FormInput = () => {
             <label htmlFor="startDate">Start dato</label>
 
             <DatePicker
+              locale="da"
               name="startDate"
               id="startDate"
               dateFormat="yyyy-MM-dd"
@@ -102,6 +106,7 @@ const FormInput = () => {
           <Form.Field>
             <label htmlFor="endDate">Slut dato</label>
             <DatePicker
+              locale="da"
               name="endDate"
               id="endDate"
               dateFormat="yyyy-MM-dd"
