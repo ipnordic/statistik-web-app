@@ -64,6 +64,11 @@ const Period = () => {
               <Table.Body>
                 {apiData &&
                   apiData
+                    .filter(
+                      (item) =>
+                        item.QueueExtension >= 151210 &&
+                        item.QueueExtension < 151265
+                    )
                     .sort((a, b) => {
                       return b.Calls - a.Calls;
                     })

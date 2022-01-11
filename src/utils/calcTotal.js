@@ -1,5 +1,11 @@
 export const totalCalls = (data) => {
-  const numbers = data && data.map((item) => item.Calls);
+  const numbers =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.Calls);
   const sumNumbers =
     numbers &&
     numbers.reduce(function (sum, number) {
@@ -10,7 +16,13 @@ export const totalCalls = (data) => {
 };
 
 export const totalAnsweredCalls = (data) => {
-  const answeredNumbers = data && data.map((item) => item.AnsweredCalls);
+  const answeredNumbers =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.AnsweredCalls);
   const sumAnsweredNumbers =
     answeredNumbers &&
     answeredNumbers.reduce(function (sum, number) {
@@ -22,7 +34,13 @@ export const totalAnsweredCalls = (data) => {
 };
 
 export const totalTransfers = (data) => {
-  const transferedNumbers = data && data.map((item) => item.Transfers);
+  const transferedNumbers =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.Transfers);
   const sumTransferedNumbers =
     transferedNumbers &&
     transferedNumbers.reduce(function (sum, number) {
@@ -34,7 +52,13 @@ export const totalTransfers = (data) => {
 };
 
 export const totalAbandoned = (data) => {
-  const abandonedNumbers = data && data.map((item) => item.Abandoned);
+  const abandonedNumbers =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.Abandoned);
   const sumAbandonedNumbers =
     abandonedNumbers &&
     abandonedNumbers.reduce(function (sum, number) {
@@ -46,7 +70,13 @@ export const totalAbandoned = (data) => {
 };
 
 export const totalTimeOut = (data) => {
-  const timeOutNumbers = data && data.map((item) => item.TimeOut);
+  const timeOutNumbers =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.TimeOut);
   const sumTimeOutNumbers =
     timeOutNumbers &&
     timeOutNumbers.reduce(function (sum, number) {
@@ -58,7 +88,13 @@ export const totalTimeOut = (data) => {
 };
 
 export const totalExitempty = (data) => {
-  const exitEmptyNumber = data && data.map((item) => item.Exitempty);
+  const exitEmptyNumber =
+    data &&
+    data
+      .filter(
+        (item) => item.QueueExtension >= 151210 && item.QueueExtension < 151265
+      )
+      .map((item) => item.Exitempty);
   const sumExitemptyNumbers =
     exitEmptyNumber &&
     exitEmptyNumber.reduce(function (sum, number) {

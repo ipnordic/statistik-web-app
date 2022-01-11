@@ -9,7 +9,14 @@ const Chart = () => {
   return (
     <ChartContainer>
       {apiData && (
-        <BarChart width={1200} height={280} data={apiData}>
+        <BarChart
+          width={1200}
+          height={280}
+          data={apiData.filter(
+            (item) =>
+              item.QueueExtension >= 151210 && item.QueueExtension < 151265
+          )}
+        >
           <Bar dataKey="Calls" fill="#31644a" />
           <CartesianGrid strokeDashArray="4 1 2" />
           <XAxis
