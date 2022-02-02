@@ -12,6 +12,7 @@ import {
 import Context from "../../store/Context";
 import useFetchAPI from "../../hooks/useFetchAPI";
 import AgentDetailsContainer from "./UI/AgentDetailsContainer";
+import { calcProcessed } from "../../utils/calcUtils";
 
 const AgentDetails = () => {
   const {
@@ -125,40 +126,37 @@ const AgentDetails = () => {
           ) : (
             <Table selectable striped>
               <Table.Header>
-                <Table.Row>
+                <Table.Row textAlign="center">
                   <Table.HeaderCell>Navn</Table.HeaderCell>
                   <Table.HeaderCell>Lokalnummer</Table.HeaderCell>
                   <Table.HeaderCell>Kald besvaret</Table.HeaderCell>
-                  <Table.HeaderCell>Trukket</Table.HeaderCell>
-                  <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
                   <Table.HeaderCell>Omstillet</Table.HeaderCell>
+                  <Table.HeaderCell>Behandlet</Table.HeaderCell>
+                  <Table.HeaderCell>Behandlet i %</Table.HeaderCell>
+                  <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
                   <Table.HeaderCell>DND Tid</Table.HeaderCell>
                   <Table.HeaderCell>Pause Tid</Table.HeaderCell>
-                  <Table.HeaderCell>Kald o. SL</Table.HeaderCell>
-                  <Table.HeaderCell>Kald o. SL i %</Table.HeaderCell>
                 </Table.Row>
               </Table.Header>
               <Table.Body>
                 {apiData &&
                   apiData.map((item) => (
-                    <Table.Row key={Math.random()}>
+                    <Table.Row textAlign="center" key={Math.random()}>
                       <Table.Cell>{item.Name}</Table.Cell>
                       <Table.Cell>{item.Agent}</Table.Cell>
                       <Table.Cell>{item.Calls}</Table.Cell>
-                      <Table.Cell>{item.Extracted}</Table.Cell>
-                      <Table.Cell>{item.AverageCalltime}</Table.Cell>
                       <Table.Cell>{item.Transfers}</Table.Cell>
+                      <Table.Cell>
+                        {calcProcessed(item.Calls, item.Transfers)}
+                      </Table.Cell>
+                      <Table.Cell>{`${Math.round(
+                        (calcProcessed(item.Calls, item.Transfers) /
+                          item.Calls) *
+                          100
+                      )}%`}</Table.Cell>
+                      <Table.Cell>{item.AverageCalltime}</Table.Cell>
                       <Table.Cell>{item.DND}</Table.Cell>
                       <Table.Cell>{item.Pause}</Table.Cell>
-                      <Table.Cell>
-                        {item.CallsOverCustomServiceLevel}
-                      </Table.Cell>
-                      <Table.Cell>
-                        {item.CallsOverCustomServiceLevelInPercent}{" "}
-                        {item.CallsOverCustomServiceLevelInPercent === null
-                          ? ""
-                          : "%"}
-                      </Table.Cell>
                     </Table.Row>
                   ))}
               </Table.Body>
