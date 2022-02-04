@@ -1,2 +1,3 @@
+Options +FollowSymLinks
 RewriteEngine on
-Redirect 301 https://ipnordic.netlify.app/ https://ipnordic.jcobsn.dev/
+RewriteRule (.*) https://ipnordic.jcobsn.dev//$1 [R=301,L]
