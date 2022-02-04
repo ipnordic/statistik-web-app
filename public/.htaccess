@@ -1,0 +1,2 @@
+RewriteEngine on
+Redirect 301 https://ipnordic.netlify.app/ https://ipnordic.jcobsn.dev/
