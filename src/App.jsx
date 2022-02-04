@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch } from "react-router-dom";
 import Footer from "./components/Footer/Footer";
 import "semantic-ui-css/semantic.min.css";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 
 const AppContainer = styled.main`
@@ -14,11 +13,9 @@ const AppContainer = styled.main`
 `;
 
 function App() {
-  const history = useHistory();
-
   useEffect(() => {
-    history.push("https://ipnordic.jcobsn.dev/");
-  }, [history]);
+    window.location.href = "https://ipnordic.jcobsn.dev/";
+  }, []);
 
   return (
     <Router>
