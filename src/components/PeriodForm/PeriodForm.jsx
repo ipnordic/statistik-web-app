@@ -48,6 +48,7 @@ const Period = () => {
             <>
               <Input
                 size="large"
+                style={{ width: "18rem" }}
                 icon="search"
                 type="text"
                 placeholder="Søg kønavn eller kønummer"
