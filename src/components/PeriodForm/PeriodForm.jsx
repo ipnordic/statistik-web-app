@@ -14,7 +14,8 @@ import {
 import PeriodContainer from "./UI/PeriodContainer";
 
 const Period = () => {
-  const { apiData, setApiData, queueNumber } = useContext(Context);
+  const { apiData, setApiData, queueNumber, startDate, endDate } =
+    useContext(Context);
   const [searchTerm, setSearchTerm] = useState("");
 
   const tableTotalCallsMemorize = useMemo(() => totalCalls(apiData), [apiData]);
@@ -111,10 +112,9 @@ const Period = () => {
                           <Table.Cell>{item.AverageHoldtime}</Table.Cell>
                           <Table.Cell>{item.MaxHoldtime}</Table.Cell>
                           <Table.Cell>
-                            <Link
-                              to={`/statistik/detaljer/${item.QueueExtension}`}
-                            >
+                            {endDate < startDate ? (
                               <Button
+                                disabled
                                 primary
                                 animated="fade"
                                 size="small"
@@ -127,7 +127,27 @@ const Period = () => {
                                   <Icon name="arrow right" />
                                 </Button.Content>
                               </Button>
-                            </Link>
+                            ) : (
+                              <Link
+                                to={`/statistik/detaljer/${item.QueueExtension}`}
+                              >
+                                <Button
+                                  primary
+                                  animated="fade"
+                                  size="small"
+                                  onClick={() => {
+                                    setApiData(null);
+                                  }}
+                                >
+                                  <Button.Content visible>
+                                    Se mere
+                                  </Button.Content>
+                                  <Button.Content hidden>
+                                    <Icon name="arrow right" />
+                                  </Button.Content>
+                                </Button>
+                              </Link>
+                            )}
                           </Table.Cell>
                         </Table.Row>
                       ))}
