@@ -97,6 +97,7 @@ const FormInput = () => {
               name="startDate"
               id="startDate"
               dateFormat="yyyy-MM-dd"
+              autoComplete="off"
               value={startDate}
               {...register("startDate", { value: startDate })}
               onChange={(date) => setStartDate(formatDate(date))}
@@ -110,6 +111,7 @@ const FormInput = () => {
               name="endDate"
               id="endDate"
               dateFormat="yyyy-MM-dd"
+              autoComplete="off"
               value={endDate}
               {...register("endDate", { value: endDate })}
               onChange={(date) => setEndDate(formatDate(date))}
