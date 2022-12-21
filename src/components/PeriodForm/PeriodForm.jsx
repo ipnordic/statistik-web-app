@@ -39,7 +39,7 @@ const Period = () => {
     () => totalExitempty(apiData),
     [apiData]
   );
-
+console.log(apiData);
   return (
     <>
       {apiData && (
@@ -71,6 +71,7 @@ const Period = () => {
                     <Table.HeaderCell>Gns. Samtaletid</Table.HeaderCell>
                     <Table.HeaderCell>Gns. Ventetid</Table.HeaderCell>
                     <Table.HeaderCell>Længste ventetid</Table.HeaderCell>
+                    <Table.HeaderCell>ServiceLevel</Table.HeaderCell>
                     <Table.HeaderCell></Table.HeaderCell>
                   </Table.Row>
                 </Table.Header>
@@ -111,6 +112,7 @@ const Period = () => {
                           <Table.Cell>{item.AverageCalltime}</Table.Cell>
                           <Table.Cell>{item.AverageHoldtime}</Table.Cell>
                           <Table.Cell>{item.MaxHoldtime}</Table.Cell>
+                          <Table.Cell>{item.ServiceLevel}</Table.Cell>
                           <Table.Cell>
                             {endDate < startDate ? (
                               <Button
